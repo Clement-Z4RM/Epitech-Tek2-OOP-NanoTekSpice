@@ -7,6 +7,6 @@
 
 #include "NanoTekSpice.hpp"
 
-int NanoTekSpice::NanoTekSpice::run([[maybe_unused]] const char *filename) {
+int nts::NanoTekSpice::run([[maybe_unused]] const char *argv[]) {
     return 0;
 }

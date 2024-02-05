@@ -8,5 +8,5 @@
 #include "NanoTekSpice.hpp"
 
 int main([[maybe_unused]] int argc, const char *argv[]) {
-    return NanoTekSpice::NanoTekSpice::run(argv[1]);
+    return nts::NanoTekSpice::run(argv);
 }

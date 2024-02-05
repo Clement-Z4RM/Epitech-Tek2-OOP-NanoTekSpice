@@ -8,7 +8,7 @@
 #ifndef NANOTEKSPICE_NANOTEKSPICE_HPP_
 #define NANOTEKSPICE_NANOTEKSPICE_HPP_
 
-namespace NanoTekSpice {
+namespace nts {
     class NanoTekSpice {
     public:
         static int run(const char *filename);
