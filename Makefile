@@ -19,7 +19,8 @@ OBJ			=	$(SRC:.cpp=.o)
 TESTS_SRC	=	$(filter-out src/Main.cpp, $(SRC))	\
 				tests/test_or_gate.cpp				\
 				tests/test_clock.cpp				\
-				tests/test_bad.cpp
+				tests/test_bad.cpp					\
+				tests/test_no_argument.cpp
 
 CPPFLAGS	=	-std=c++20 -W -Wall -Wextra -Werror -Wpedantic -I./include/
 

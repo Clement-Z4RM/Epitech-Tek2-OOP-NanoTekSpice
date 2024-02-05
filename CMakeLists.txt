@@ -5,11 +5,20 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(include)
 
-add_executable(nanotekspice
+set(NANOTEKSPICE_SOURCES
         src/Main.cpp
         src/NanoTekSpice.cpp)
 
-add_executable(unit_tests
+set(UNIT_TESTS_SOURCES
         tests/test_or_gate.cpp
         tests/test_clock.cpp
-        tests/test_bad.cpp)
+        tests/test_bad.cpp
+        tests/test_no_argument.cpp)
+
+add_executable(nanotekspice ${NANOTEKSPICE_SOURCES})
+
+list(REMOVE_ITEM NANOTEKSPICE_SOURCES src/Main.cpp)
+
+add_executable(unit_tests ${NANOTEKSPICE_SOURCES} ${UNIT_TESTS_SOURCES})
+
+target_link_libraries(unit_tests PRIVATE criterion gcov)
