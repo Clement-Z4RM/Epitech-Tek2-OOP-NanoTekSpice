@@ -7,7 +7,19 @@ include_directories(include)
 
 set(NANOTEKSPICE_SOURCES
         src/Main.cpp
-        src/NanoTekSpice.cpp)
+        src/NanoTekSpice.cpp
+        src/Components/Elementary/And/And.cpp
+        src/Components/Elementary/And/And.hpp
+        src/Components/AComponent.cpp
+        src/Components/AComponent.hpp
+        src/Components/IComponent.cpp
+        src/Components/IComponent.hpp
+        src/Components/Elementary/Not/Not.cpp
+        src/Components/Elementary/Not/Not.hpp
+        src/Components/Special/False/False.cpp
+        src/Components/Special/False/False.hpp
+        src/Components/Special/True/True.cpp
+        src/Components/Special/True/True.hpp)
 
 set(UNIT_TESTS_SOURCES
         tests/test_or_gate.cpp
