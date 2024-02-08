@@ -13,6 +13,8 @@
 #include <cstdio>
 #include "NanoTekSpice.hpp"
 
+static const char *ARGV[] = {"./nanotekspice", "./tests/test_files/or_gate/or_gate.nts"};
+
 static void redirectAllStd() {
     cr_redirect_stdout();
     cr_redirect_stderr();
@@ -28,7 +30,7 @@ Test(NanoTekSpice, or_gate, .init = redirectAllStd)
     fclose(fake_stdin);
     file.close();
 
-    cr_assert_eq(NanoTekSpice::NanoTekSpice::run("./tests/test_files/or_gate/or_gate.nts"), 0);
+    cr_assert_eq(nts::NanoTekSpice::run(ARGV), 0);
 
     std::cout.flush();
     std::cerr.flush();
