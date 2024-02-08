@@ -14,9 +14,9 @@ nts::Tristate nts::operator!(nts::Tristate state) {
 }
 
 nts::Tristate nts::operator&&(nts::Tristate state1, nts::Tristate state2) {
-    if (state1 == Undefined || state2 == Undefined)
-        return Undefined;
     if (state1 == False || state2 == False)
         return False;
+    if (state1 == Undefined || state2 == Undefined)
+        return Undefined;
     return True;
 }

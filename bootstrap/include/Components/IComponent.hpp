@@ -31,8 +31,10 @@ namespace nts {
         virtual Tristate compute(std::size_t pin) = 0;
         virtual void insert(std::size_t pin, IComponent &other, std::size_t otherPin) = 0;
         virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) = 0;
-        virtual void erase(std::size_t pin) = 0;
-        [[nodiscard]] virtual const std::map<std::size_t, Link> &getLinks() const = 0;
+        [[nodiscard]] virtual const Tristate at(std::size_t pin) const = 0;
+
+    protected:
+        std::map<std::size_t, Link> _links;
     };
 
     struct Link {

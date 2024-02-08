@@ -27,7 +27,7 @@ void nts::AComponent::simulate(std::size_t tick) {}
  * @param otherPin The pin of the other component.
  */
 void nts::AComponent::insert(std::size_t pin, nts::IComponent &other, std::size_t otherPin) {
-    _links.insert(std::make_pair(pin, (Link){other, otherPin, Undefined}));
+    _links.insert(std::make_pair(pin, (Link){other, otherPin, other.compute(otherPin)}));
 }
 
 /**
@@ -43,9 +43,10 @@ void nts::AComponent::insert(std::size_t pin, nts::IComponent &other, std::size_
 void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) {
     // TODO handle multiple connections on otherPin
     if (_links.find(pin) != _links.end()) {
-        Link link = _links.at(pin);
-
-        link.other.erase(link.otherPin);
+//        Link link = _links.at(pin);
+//
+//        link.other.erase(link.otherPin);
+        // TODO: exit with error (multiple connections on same pin)
     }
     insert(pin, other, otherPin);
     other.insert(otherPin, *this, pin);
@@ -67,24 +68,8 @@ nts::Tristate nts::AComponent::getLink(std::size_t pin) const {
     return link.other.compute(link.otherPin);
 }
 
-/**
- * @warning PREFER ONLY INTERNAL USE
- *
- * @brief Remove a link from the current component.
- *
- * @param pin The pin of the current component to erase.
- */
-void nts::AComponent::erase(std::size_t pin) {
-    _links.erase(pin);
-}
-
-/**
- * @warning PREFER ONLY INTERNAL USE
- *
- * @brief Get the links of the current component.
- *
- * @return The links of the current component.
- */
-const std::map<std::size_t, nts::Link> &nts::AComponent::getLinks() const {
-    return _links;
+const nts::Tristate nts::AComponent::at(std::size_t pin) const {
+    if (_links.contains(pin))
+        return _links.at(pin).state;
+    return Undefined;
 }

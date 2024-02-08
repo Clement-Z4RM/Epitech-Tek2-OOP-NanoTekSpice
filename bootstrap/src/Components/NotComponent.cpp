@@ -8,13 +8,13 @@
 #include "Components/NotComponent.hpp"
 
 nts::Tristate nts::NotComponent::compute(std::size_t pin) {
-    Link link = _links.at(1);
+    Tristate state = at(1);
 
     switch (pin) {
         case 1:
-            return link.other.compute(link.otherPin);
+            return state;
         case 2:
-            return !link.other.compute(link.otherPin);
+            return !state;
         default:
             return Undefined;
     }
