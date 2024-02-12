@@ -7,7 +7,7 @@
 
 #include "AComponent.hpp"
 
-void nts::AComponent::simulate(std::size_t tick) {}
+void nts::AComponent::simulate([[maybe_unused]] std::size_t tick) {}
 
 /**
  * @brief Link a pin of the current component to another component.
@@ -27,7 +27,8 @@ void nts::AComponent::simulate(std::size_t tick) {}
  * @param otherPin The pin of the other component.
  */
 void nts::AComponent::insert(std::size_t pin, nts::IComponent &other, std::size_t otherPin) {
-    _links.insert(std::make_pair(pin, (Link){other, otherPin, other.compute(otherPin)}));
+    Link link = {other, otherPin, other.compute(otherPin)};
+    _links.insert(std::make_pair(pin, link));
 }
 
 /**
@@ -68,7 +69,7 @@ nts::Tristate nts::AComponent::getLink(std::size_t pin) const {
     return link.other.compute(link.otherPin);
 }
 
-const nts::Tristate nts::AComponent::at(std::size_t pin) const {
+nts::Tristate nts::AComponent::at(std::size_t pin) const {
     if (_links.contains(pin))
         return _links.at(pin).state;
     return Undefined;

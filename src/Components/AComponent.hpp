@@ -18,7 +18,7 @@ namespace nts {
         void insert(std::size_t pin, IComponent &other, std::size_t otherPin) override;
         void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) override;
         [[nodiscard]] Tristate getLink(std::size_t pin) const;
-        [[nodiscard]] const Tristate at(std::size_t pin) const override;
+        [[nodiscard]] Tristate at(std::size_t pin) const override;
     };
 }
 
