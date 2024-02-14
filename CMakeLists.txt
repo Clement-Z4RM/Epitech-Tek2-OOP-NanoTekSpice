@@ -19,13 +19,19 @@ set(NANOTEKSPICE_SOURCES
         src/Components/Special/False/False.cpp
         src/Components/Special/False/False.hpp
         src/Components/Special/True/True.cpp
-        src/Components/Special/True/True.hpp)
+        src/Components/Special/True/True.hpp
+        src/Components/Elementary/Or/Or.cpp
+        src/Components/Elementary/Or/Or.hpp
+        src/Components/Elementary/Xor/Xor.cpp
+        src/Components/Elementary/Xor/Xor.hpp)
 
 set(UNIT_TESTS_SOURCES
         tests/test_or_gate.cpp
         tests/test_clock.cpp
         tests/test_bad.cpp
-        tests/test_no_argument.cpp)
+        tests/test_no_argument.cpp
+        src/Components/Elementary/Or/Or.cpp
+        src/Components/Elementary/Or/Or.hpp)
 
 add_executable(nanotekspice ${NANOTEKSPICE_SOURCES})
 

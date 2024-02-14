@@ -20,6 +20,7 @@ namespace nts {
 
     Tristate operator!(Tristate state);
     Tristate operator&&(Tristate state1, Tristate state2);
+    Tristate operator||(Tristate state1, Tristate state2);
 
     struct Link;
 
