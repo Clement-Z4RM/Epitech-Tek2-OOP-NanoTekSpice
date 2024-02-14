@@ -18,7 +18,9 @@ SRC			=	src/Main.cpp			\
 				src/Components/Elementary/And/And.cpp	\
 				src/Components/Elementary/Not/Not.cpp	\
 				src/Components/Special/False/False.cpp	\
-				src/Components/Special/True/True.cpp
+				src/Components/Special/True/True.cpp	\
+				src/Components/Elementary/Or/Or.cpp		\
+                src/Components/Elementary/Xor/Xor.cpp
 
 OBJ			=	$(SRC:.cpp=.o)
 
