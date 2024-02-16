@@ -17,6 +17,8 @@ namespace nts {
         [[nodiscard]] static std::vector<std::string> splitLine(const std::string &s);
 
         [[nodiscard]] static std::vector<std::string> splitLine(const std::string &s, char delimiter);
+
+        [[nodiscard]] static std::string trim(const std::string &s);
     };
 }
 
