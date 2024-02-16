@@ -24,7 +24,7 @@ int nts::NanoTekSpice::run(int argc, const char *argv[]) {
     try {
         circuit.loadConfig(config);
     } catch (const Circuit::Error &exception) {
-        std::cerr << config.getFilename() << ": " << exception.what() << "." << std::endl;
+        std::cerr << program_invocation_name << ": " << config.getFilename() << ": " << exception.what() << "." << std::endl;
         return 84;
     }
     if (!circuit.isLoaded())
