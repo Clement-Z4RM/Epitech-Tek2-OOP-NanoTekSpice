@@ -11,7 +11,7 @@
 namespace nts {
     class NanoTekSpice {
     public:
-        static int run(const char *argv[]);
+        static int run(int argc, const char *argv[]);
 
         static void help();
     };

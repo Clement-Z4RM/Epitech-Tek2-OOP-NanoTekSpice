@@ -10,8 +10,13 @@
 #include "Parsing/Config/Config.hpp"
 #include "Circuit/Circuit.hpp"
 
-int nts::NanoTekSpice::run(const char *argv[]) {
-    Config config(argv[1]);
+int nts::NanoTekSpice::run(int argc, const char *argv[]) {
+    if (argc == 1) {
+        std::cerr << program_invocation_name << ": No file provided." << std::endl;
+        return 84;
+    }
+
+    Config config((std::string(argv[1])));
     if (!config.isOpen())
         return 84;
 

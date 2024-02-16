@@ -13,7 +13,7 @@
 namespace nts {
     class Config {
     public:
-        explicit Config(const char *filename);
+        explicit Config(std::string filename);
 
         [[nodiscard]] bool isOpen() const;
 
