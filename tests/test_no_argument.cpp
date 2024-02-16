@@ -19,7 +19,7 @@ static void redirectAllStd() {
 
 Test(nts, no_argument, .init = redirectAllStd)
 {
-    cr_assert_eq(nts::NanoTekSpice::run(ARGV), 84);
+    cr_assert_eq(nts::NanoTekSpice::run(1, ARGV), 84);
 
     std::cout.flush();
     std::cerr.flush();
