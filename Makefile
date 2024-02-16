@@ -11,8 +11,12 @@ NAME		=	nanotekspice
 
 TESTS_NAME	=	unit_tests
 
-SRC			=	src/Main.cpp			\
-				src/NanoTekSpice.cpp
+SRC			=	src/Main.cpp									\
+				src/NanoTekSpice.cpp							\
+				src/Utilities/Utilities.cpp						\
+				src/Parsing/Config/Config.cpp					\
+				src/Circuit/Circuit.cpp							\
+				src/Components/Factory/ComponentsFactory.cpp
 
 OBJ			=	$(SRC:.cpp=.o)
 
@@ -41,11 +45,11 @@ re:	fclean all
 
 # Run rules
 
-run:	all
-	@./$(NAME)
+run:	re
+	@./$(NAME) $(FILE)
 
 vrun:	debug
-	@valgrind --leak-check=full ./$(NAME)
+	@valgrind --leak-check=full ./$(NAME) $(FILE)
 
 # Tests and coverage rules
 
