@@ -17,6 +17,8 @@ set(NANOTEKSPICE_SOURCES
         src/Utilities/Utilities.hpp
         src/Components/Factory/ComponentsFactory.cpp
         src/Components/Factory/ComponentsFactory.hpp
+        src/Shell/Shell.cpp
+        src/Shell/Shell.hpp
 )
 
 set(UNIT_TESTS_SOURCES

@@ -9,6 +9,7 @@
 #include "NanoTekSpice.hpp"
 #include "Parsing/Config/Config.hpp"
 #include "Circuit/Circuit.hpp"
+#include "Shell/Shell.hpp"
 
 int nts::NanoTekSpice::run(int argc, const char *argv[]) {
     if (argc == 1) {
@@ -29,6 +30,8 @@ int nts::NanoTekSpice::run(int argc, const char *argv[]) {
     }
     if (!circuit.isLoaded())
         return 84;
+
+    Shell::run();
     return 0;
 }
 
