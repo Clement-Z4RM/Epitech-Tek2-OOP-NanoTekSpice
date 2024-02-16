@@ -14,7 +14,6 @@
 #include "IComponent.hpp"
 
 namespace nts {
-    // TODO: Voir avec un pédago si l'implémentation de la factory est correcte, et si createComponent peut être static
     class ComponentsFactory {
     public:
         [[nodiscard]] static std::unique_ptr<IComponent> createComponent(const std::string &type);

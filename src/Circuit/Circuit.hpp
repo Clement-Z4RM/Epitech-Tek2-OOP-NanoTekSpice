@@ -32,8 +32,10 @@ namespace nts {
                 ClosedFileConfig,
                 UnknownPart,
                 UnknownComponentType,
+                UnknownComponentName,
                 InvalidChipsetLineFormat,
-                InvalidLinkLineFormat
+                InvalidLinkLineFormat,
+                NoChipset
             };
 
             static const std::string ERRORS[];

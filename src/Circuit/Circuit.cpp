@@ -15,8 +15,10 @@ const std::string nts::Circuit::Error::ERRORS[] = {
         "The specified configuration is invalid (no file open)",
         "Unknown part name",
         "Unknown component type",
+        "Unknown component name",
         "Invalid chipset line format",
-        "Invalid link line format"
+        "Invalid link line format",
+        "No chipset found in the configuration file"
 };
 
 nts::Circuit::Error::Error(std::string message) : _message(std::move(message)) {}
@@ -26,6 +28,7 @@ const char *nts::Circuit::Error::what() const noexcept {
 }
 
 nts::Circuit::Circuit() : _isLoaded(false) {
+    // TODO: Can parts be inverted?
     _partsFunctions["chipsets"] = &nts::Circuit::_chipsetFunction;
     _partsFunctions["links"] = &nts::Circuit::_linkFunction;
 }
@@ -38,7 +41,6 @@ bool nts::Circuit::isLoaded() const {
     return _isLoaded;
 }
 
-#include <iostream>
 void nts::Circuit::loadConfig(nts::Config &config) {
     if (!config.isOpen())
         throw Error(Error::ERRORS[Error::ClosedFileConfig]);
@@ -65,11 +67,10 @@ void nts::Circuit::loadConfig(nts::Config &config) {
         }
         (this->*(_partsFunctions[currentPart]))(buffer);
     }
+    if (_chipsets.empty())
+        throw Error(Error::ERRORS[Error::NoChipset]);
+    // TODO: Error if no link/a chipset is not linked/no path from input to output...?
     _isLoaded = true;
-    for (const auto &item: _chipsets) {
-        std::cout << item.first << ": ";
-        item.second->simulate(1);
-    }
 }
 
 void nts::Circuit::_chipsetFunction(const std::string &line) {
@@ -91,5 +92,9 @@ void nts::Circuit::_linkFunction([[maybe_unused]] const std::string &line) {
     std::vector<std::string> tokens = Utilities::splitLine(line);
     std::vector<std::string> pin1 = Utilities::splitLine(tokens[PIN_1], ':');
     std::vector<std::string> pin2 = Utilities::splitLine(tokens[PIN_2], ':');
+    if (!_chipsets.contains(pin1[NAME]))
+        throw Error(Error::ERRORS[Error::UnknownComponentName] + " '" + pin1[NAME] + "'");
+    if (!_chipsets.contains(pin2[NAME]))
+        throw Error(Error::ERRORS[Error::UnknownComponentName] + " '" + pin1[NAME] + "'");
     // TODO: Implement link
 }
