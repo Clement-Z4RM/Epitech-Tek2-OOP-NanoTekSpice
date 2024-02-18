@@ -21,7 +21,8 @@ SRC			=	src/Main.cpp			\
 				src/Components/Special/True/True.cpp	\
 				src/Components/Elementary/Or/Or.cpp		\
                 src/Components/Elementary/Xor/Xor.cpp	\
-                src/Components/Special/Input/Input.cpp
+                src/Components/Special/Input/Input.cpp	\
+                src/Components/Special/Output/Output.cpp
 
 OBJ			=	$(SRC:.cpp=.o)
 

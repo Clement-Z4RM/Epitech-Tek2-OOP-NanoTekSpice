@@ -25,7 +25,9 @@ set(NANOTEKSPICE_SOURCES
         src/Components/Elementary/Xor/Xor.cpp
         src/Components/Elementary/Xor/Xor.hpp
         src/Components/Special/Input/Input.cpp
-        src/Components/Special/Input/Input.hpp)
+        src/Components/Special/Input/Input.hpp
+        src/Components/Special/Output/Output.cpp
+        src/Components/Special/Output/Output.hpp)
 
 set(UNIT_TESTS_SOURCES
         tests/test_or_gate.cpp
