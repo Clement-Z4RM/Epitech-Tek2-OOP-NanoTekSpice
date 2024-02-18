@@ -27,7 +27,9 @@ set(NANOTEKSPICE_SOURCES
         src/Components/Special/Input/Input.cpp
         src/Components/Special/Input/Input.hpp
         src/Components/Special/Output/Output.cpp
-        src/Components/Special/Output/Output.hpp)
+        src/Components/Special/Output/Output.hpp
+        src/Components/Special/Clock/Clock.cpp
+        src/Components/Special/Clock/Clock.hpp)
 
 set(UNIT_TESTS_SOURCES
         tests/test_or_gate.cpp
