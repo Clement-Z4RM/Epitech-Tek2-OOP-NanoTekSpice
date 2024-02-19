@@ -37,7 +37,9 @@ set(NANOTEKSPICE_SOURCES
         src/Components/Gates/4030/Component4030.cpp
         src/Components/Gates/4030/Component4030.hpp
         src/Components/Gates/4069/Component4069.cpp
-        src/Components/Gates/4069/Component4069.hpp)
+        src/Components/Gates/4069/Component4069.hpp
+        src/Components/Gates/4071/Component4071.cpp
+        src/Components/Gates/4071/Component4071.hpp)
 
 set(UNIT_TESTS_SOURCES
         tests/test_or_gate.cpp
