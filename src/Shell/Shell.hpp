@@ -11,6 +11,7 @@
 #include <string>
 #include <functional>
 #include <unordered_map>
+#include "../Circuit/Circuit.hpp"
 
 #define EXIT false
 
@@ -18,22 +19,22 @@ namespace nts {
     // TODO: change commands type
     class Shell {
     public:
-        static void run();
+        static void run(Circuit &circuit);
 
     private:
-        static const std::unordered_map<std::string, std::function<bool()>> _commands;
+        static const std::unordered_map<std::string, std::function<bool(Circuit &circuit)>> _commands;
 
-        static bool executeCommand(const std::string &command);
+        static bool _executeCommand(const std::string &command, Circuit &circuit);
 
-        static bool exit();
+        static bool _exit(Circuit &circuit);
 
-        static bool display();
+        static bool _display(Circuit &circuit);
 
-        static bool changeInputValue();
+        static bool _changeInputValue(const std::string &command, Circuit &circuit);
 
-        static bool simulate();
+        static bool _simulate(Circuit &circuit);
 
-        static bool loop();
+        static bool _loop(Circuit &circuit);
     };
 }
 

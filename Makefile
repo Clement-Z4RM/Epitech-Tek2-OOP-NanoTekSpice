@@ -39,10 +39,8 @@ all:
 $(NAME):	$(OBJ)
 	@$(CC) -o $(NAME) $(OBJ) $(CPPFLAGS)
 
-debug:	fclean
+debug:
 	@$(CC) -o $(NAME) $(SRC) $(CPPFLAGS) -g
-
-re:	fclean all
 
 # Run rules
 
@@ -76,3 +74,5 @@ clean:
 fclean:	clean
 	@rm -f $(NAME)
 	@rm -f $(TESTS_NAME)
+
+re:	fclean all

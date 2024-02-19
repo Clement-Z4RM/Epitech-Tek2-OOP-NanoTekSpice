@@ -25,5 +25,5 @@ Test(nts, no_argument, .init = redirectAllStd)
     std::cerr.flush();
 
     cr_assert_stdout_eq_str("");
-    cr_assert_stderr_eq_str("./nanotekspice: No file provided\n");
+    cr_assert_stderr_eq_str("./nanotekspice: No file provided.\n");
 }

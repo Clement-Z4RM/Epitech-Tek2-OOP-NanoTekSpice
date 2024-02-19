@@ -18,7 +18,7 @@ namespace nts {
     public:
         [[nodiscard]] static std::unique_ptr<IComponent> createComponent(const std::string &type);
 
-        [[nodiscard]] static bool isComponentExists(const std::string &type);
+        [[nodiscard]] static bool isValidComponentType(const std::string &type);
 
     private:
         static const std::unordered_map<std::string, std::function<std::unique_ptr<IComponent>()>> _components;
