@@ -1,0 +1,17 @@
+/*
+** EPITECH PROJECT, 2024
+** NanoTekSpice
+** File description:
+** Component4069.cpp
+*/
+
+#include "Component4069.hpp"
+
+nts::Tristate nts::Component4069::compute(std::size_t pin) {
+    if (pin == 2 || pin == 4 || pin == 6 || pin == 8 || pin == 10 || pin == 12) {
+        size_t inputPin = pin - 1;
+        Tristate input = getLink(inputPin);
+        return !input;
+    } else
+        return Undefined;
+}
