@@ -54,11 +54,15 @@ namespace nts {
     public:
         virtual ~IComponent() = default;
 
-        virtual Component getType() const = 0;
+        [[nodiscard]] virtual Component getType() const = 0;
 
         virtual void simulate(std::size_t tick) = 0;
-        virtual Tristate compute(std::size_t pin) = 0;
+        [[nodiscard]] virtual Tristate compute(std::size_t pin) = 0;
         virtual void setLink(std::size_t pin, std::unique_ptr<IComponent> &other, std::size_t otherPin) = 0;
+
+        // Only for inputs and clocks
+        virtual void updateState(Tristate state) = 0;
+        [[nodiscard]] virtual char getValue() const = 0;
     };
 }
 

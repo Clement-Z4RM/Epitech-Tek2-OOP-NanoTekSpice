@@ -14,7 +14,7 @@
 namespace nts {
     class SampleComponent : public IComponent {
     public:
-        explicit SampleComponent(Component type) : _type(type) {};
+        explicit SampleComponent(Component type) : _type(type), _state(Undefined) {};
 
         [[nodiscard]] Component getType() const override {
             return _type;
@@ -28,11 +28,26 @@ namespace nts {
             return Tristate::Undefined;
         }
 
-        void setLink([[maybe_unused]] std::size_t pin, [[maybe_unused]] std::unique_ptr<IComponent> &other,
-                     [[maybe_unused]] std::size_t otherPin) override {}
+        void setLink([[maybe_unused]] std::size_t pin, [[maybe_unused]] std::unique_ptr<IComponent> &other, [[maybe_unused]] std::size_t otherPin) override {}
+
+        void updateState(Tristate state) override {
+            _state = state;
+        }
+
+        [[nodiscard]] char getValue() const override {
+            switch (_state) {
+                case True:
+                    return '1';
+                case False:
+                    return '0';
+                default:
+                    return 'U';
+            }
+        }
 
     private:
         Component _type;
+        Tristate _state;
     };
 }
 
@@ -81,6 +96,6 @@ std::unique_ptr<nts::IComponent> nts::ComponentsFactory::createComponent(const s
     return nullptr;
 }
 
-bool nts::ComponentsFactory::isComponentExists(const std::string &type) {
+bool nts::ComponentsFactory::isValidComponentType(const std::string &type) {
     return _components.contains(type);
 }

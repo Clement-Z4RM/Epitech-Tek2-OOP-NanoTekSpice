@@ -30,6 +30,8 @@ namespace nts {
         class Error : public std::exception {
         public:
             enum ErrorType {
+                LoadedConfig,
+                NotLoadedConfig,
                 ClosedFileConfig,
                 UnknownPart,
                 UnknownComponentType,
@@ -61,14 +63,20 @@ namespace nts {
 
         [[nodiscard]] bool isLoaded() const;
 
+        [[nodiscard]] const std::unordered_map<std::string, std::unique_ptr<IComponent>> &getComponents() const;
+
         void loadConfig(Config &config);
+
+        [[nodiscard]] bool containsComponent(const std::string &name) const;
+
+        void setInputValue(const std::string &componentName, char value);
 
     private:
         bool _isLoaded;
         std::unordered_map<std::string, void (Circuit::*)(const std::string &)> _partsFunctions;
 
         // TODO: map for display command (ASCII order)?
-        std::unordered_map<std::string, std::unique_ptr<IComponent>> _chipsets;
+        std::unordered_map<std::string, std::unique_ptr<IComponent>> _components;
 
         void _chipsetFunction(const std::string &line);
 

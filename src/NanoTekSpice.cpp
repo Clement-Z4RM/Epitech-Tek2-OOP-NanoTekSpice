@@ -31,7 +31,7 @@ int nts::NanoTekSpice::run(int argc, const char *argv[]) {
     if (!circuit.isLoaded())
         return 84;
 
-    Shell::run();
+    Shell::run(circuit);
     return 0;
 }
 
