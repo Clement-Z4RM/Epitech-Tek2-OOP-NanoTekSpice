@@ -69,24 +69,24 @@ void nts::Circuit::loadConfig(nts::Config &config) {
     }
     if (_chipsets.empty())
         throw Error(Error::ERRORS[Error::NoChipset]);
-    // TODO: Error if no link/a chipset is not linked/no path from input to output...?
+    // TODO: Error if no link/a chipset is not linked/no path from input to output/no input and or output/...?
     _isLoaded = true;
 }
 
 void nts::Circuit::_chipsetFunction(const std::string &line) {
-    if (!std::regex_match(line, std::regex(R"(^[[:blank:]]*[[:alnum:]]{2,}[[:blank:]]+[[:alnum:]]+[[:blank:]]*$)")))
+    if (!std::regex_match(line, std::regex(R"(^[[:blank:]]*[[:alnum:]]{2,}[[:blank:]]+\w+[[:blank:]]*$)")))
         throw Error(Error::ERRORS[Error::InvalidChipsetLineFormat] + " '" + line + "'");
 
     std::vector<std::string> tokens = Utilities::splitLine(line);
-    if (!ComponentsFactory::isComponentExists(tokens[COMPONENT]))
-        throw Error(Error::ERRORS[Error::UnknownComponentType] + " '" + tokens[COMPONENT] + "'");
-    if (_chipsets.contains(tokens[NAME]))
-        throw Error("Component '" + tokens[NAME] + "' already exists");
-    _chipsets[tokens[NAME]] = ComponentsFactory::createComponent(tokens[COMPONENT]);
+    if (!ComponentsFactory::isComponentExists(tokens[COMPONENT_TYPE]))
+        throw Error(Error::ERRORS[Error::UnknownComponentType] + " '" + tokens[COMPONENT_TYPE] + "'");
+    if (_chipsets.contains(tokens[COMPONENT_NAME]))
+        throw Error("Component '" + tokens[COMPONENT_NAME] + "' already exists");
+    _chipsets[tokens[COMPONENT_NAME]] = ComponentsFactory::createComponent(tokens[COMPONENT_TYPE]);
 }
 
 void nts::Circuit::_linkFunction([[maybe_unused]] const std::string &line) {
-    if (!std::regex_match(line, std::regex(R"(^[[:blank:]]*[[:alnum:]]+:\d+[[:blank:]]+[[:alnum:]]+:\d+[[:blank:]]*$)")))
+    if (!std::regex_match(line, std::regex(R"(^[[:blank:]]*\w+:\d+[[:blank:]]+\w+:\d+[[:blank:]]*$)")))
         throw Error(Error::ERRORS[Error::InvalidLinkLineFormat] + " '" + line + "'");
 
     std::vector<std::string> tokens = Utilities::splitLine(line);

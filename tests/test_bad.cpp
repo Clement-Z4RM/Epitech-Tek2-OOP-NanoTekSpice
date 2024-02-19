@@ -19,11 +19,11 @@ static void redirectAllStd() {
 
 Test(NanoTekSpice, bad, .init = redirectAllStd)
 {
-    cr_assert_eq(nts::NanoTekSpice::run(ARGV), 84);
+    cr_assert_eq(nts::NanoTekSpice::run(2, ARGV), 84);
 
     std::cout.flush();
     std::cerr.flush();
 
     cr_assert_stdout_eq_str("");
-    cr_assert_stderr_eq_str("./nanotekspice: \33[3m./tests/test_files/bad.nts\33[0m: Unknown component name\n");
+    cr_assert_stderr_eq_str("./nanotekspice: ./tests/test_files/bad.nts: Unknown component name 'a'.\n");
 }

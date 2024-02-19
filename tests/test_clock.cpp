@@ -30,7 +30,7 @@ Test(NanoTekSpice, clock, .init = redirectAllStd)
     fclose(fake_stdin);
     file.close();
 
-    cr_assert_eq(nts::NanoTekSpice::run(ARGV), 0);
+    cr_assert_eq(nts::NanoTekSpice::run(2, ARGV), 0);
 
     std::cout.flush();
     std::cerr.flush();

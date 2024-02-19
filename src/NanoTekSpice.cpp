@@ -9,9 +9,15 @@
 #include "NanoTekSpice.hpp"
 #include "Parsing/Config/Config.hpp"
 #include "Circuit/Circuit.hpp"
+#include "Shell/Shell.hpp"
 
-int nts::NanoTekSpice::run(const char *argv[]) {
-    Config config(argv[1]);
+int nts::NanoTekSpice::run(int argc, const char *argv[]) {
+    if (argc == 1) {
+        std::cerr << program_invocation_name << ": No file provided." << std::endl;
+        return 84;
+    }
+
+    Config config((std::string(argv[1])));
     if (!config.isOpen())
         return 84;
 
@@ -19,11 +25,13 @@ int nts::NanoTekSpice::run(const char *argv[]) {
     try {
         circuit.loadConfig(config);
     } catch (const Circuit::Error &exception) {
-        std::cerr << config.getFilename() << ": " << exception.what() << "." << std::endl;
+        std::cerr << program_invocation_name << ": " << config.getFilename() << ": " << exception.what() << "." << std::endl;
         return 84;
     }
     if (!circuit.isLoaded())
         return 84;
+
+    Shell::run();
     return 0;
 }
 

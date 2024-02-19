@@ -15,11 +15,12 @@
 #include "../Parsing/Config/Config.hpp"
 #include "IComponent.hpp"
 
-#define COMPONENT 0
-#define NAME      1
-#define PIN_1     0
-#define PIN_2     1
-#define PIN       1
+#define COMPONENT_TYPE 0
+#define COMPONENT_NAME 1
+#define PIN_1          0
+#define PIN_2          1
+#define NAME           0
+#define PIN            1
 
 namespace nts {
     // TODO: Implement IComponent and uncomment the inheritance (or not, IDK)
@@ -61,6 +62,7 @@ namespace nts {
         bool _isLoaded;
         std::unordered_map<std::string, void (Circuit::*)(const std::string &)> _partsFunctions;
 
+        // TODO: map for display command (ASCII order)?
         std::unordered_map<std::string, std::unique_ptr<IComponent>> _chipsets;
 
         void _chipsetFunction(const std::string &line);
