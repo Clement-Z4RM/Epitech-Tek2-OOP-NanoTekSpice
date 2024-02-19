@@ -13,6 +13,6 @@ nts::Tristate nts::ComponentClock::compute(std::size_t pin) {
     return Undefined;
 }
 
-void nts::ComponentClock::updateState(bool state) {
+void nts::ComponentClock::updateState(Tristate state) {
     _state = state;
 }

@@ -13,7 +13,7 @@
 namespace nts {
     class ComponentClock : public AComponent {
         Tristate compute(std::size_t pin) override;
-        void updateState(bool state);
+        void updateState(Tristate state);
     private:
         bool _state = false;
     };
