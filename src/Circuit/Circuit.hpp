@@ -36,6 +36,11 @@ namespace nts {
                 UnknownComponentName,
                 InvalidChipsetLineFormat,
                 InvalidLinkLineFormat,
+                LinkToItself,
+                InputLinkedToInput,
+                InputLinkedToOutput,
+                OutputLinkedToOutput,
+                OutputLinkedToInput,
                 NoChipset
             };
 

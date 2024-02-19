@@ -18,6 +18,11 @@ const std::string nts::Circuit::Error::ERRORS[] = {
         "Unknown component name",
         "Invalid chipset line format",
         "Invalid link line format",
+        "Pin linked to itself",
+        "Input linked to another input",
+        "Input linked to output",
+        "Output linked to another output",
+        "Output linked to input",
         "No chipset found in the configuration file"
 };
 
@@ -90,11 +95,33 @@ void nts::Circuit::_linkFunction([[maybe_unused]] const std::string &line) {
         throw Error(Error::ERRORS[Error::InvalidLinkLineFormat] + " '" + line + "'");
 
     std::vector<std::string> tokens = Utilities::splitLine(line);
+    if (tokens[PIN_1] == tokens[PIN_2])
+        throw Error(Error::ERRORS[Error::LinkToItself] + ": '" + tokens[PIN_1] + "'");
+
     std::vector<std::string> pin1 = Utilities::splitLine(tokens[PIN_1], ':');
     std::vector<std::string> pin2 = Utilities::splitLine(tokens[PIN_2], ':');
     if (!_chipsets.contains(pin1[NAME]))
         throw Error(Error::ERRORS[Error::UnknownComponentName] + " '" + pin1[NAME] + "'");
     if (!_chipsets.contains(pin2[NAME]))
         throw Error(Error::ERRORS[Error::UnknownComponentName] + " '" + pin1[NAME] + "'");
-    // TODO: Implement link
+
+    std::unique_ptr<IComponent> &component1 = _chipsets.at(pin1[NAME]);
+    std::unique_ptr<IComponent> &component2 = _chipsets.at(pin2[NAME]);
+
+    Component type1 = component1->getType();
+    if (type1 == _input || type1 == _output)
+        switch (component2->getType()) {
+            case _input:
+                throw Error(Error::ERRORS[type1 == _input ? Error::InputLinkedToInput : Error::OutputLinkedToInput] + ": '" + pin1[NAME] + "' and '" + pin2[NAME] + "'");
+            case _output:
+                throw Error(Error::ERRORS[type1 == _input ? Error::InputLinkedToOutput : Error::OutputLinkedToOutput] + ": '" + pin1[NAME] + "' and '" + pin2[NAME] + "'");
+            default:
+                break;
+        }
+
+    try {
+        component1->setLink(std::stoi(pin1[PIN]), component2, std::stoi(pin2[PIN]));
+    } catch (...) {
+        // TODO: catch
+    }
 }
