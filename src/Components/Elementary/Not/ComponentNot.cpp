@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Not.cpp
+** ComponentNot.cpp
 */
 
-#include "Not.hpp"
+#include "ComponentNot.hpp"
 
-nts::Tristate nts::NotComponent::compute(std::size_t pin) {
+nts::Tristate nts::ComponentNot::compute(std::size_t pin) {
     Tristate state = at(1);
 
     switch (pin) {

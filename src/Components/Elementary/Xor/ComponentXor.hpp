@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** True.hpp
+** Xor.hpp
 */
 
-#ifndef TRUECOMPONENT_HPP_
-#define TRUECOMPONENT_HPP_
+#ifndef COMPONENTXOR_HPP
+#define COMPONENTXOR_HPP
 
 #include "../../AComponent.hpp"
 
 namespace nts {
-    class TrueComponent : public AComponent {
+    class ComponentXor : public AComponent {
     public:
         Tristate compute(std::size_t pin) override;
     };
 }
 
-#endif /* !TRUECOMPONENT_HPP_ */
+#endif //COMPONENTXOR_HPP

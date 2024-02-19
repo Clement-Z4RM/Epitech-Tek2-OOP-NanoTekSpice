@@ -2,20 +2,19 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Or.hpp
+** ComponentAnd.hpp
 */
 
-#ifndef OR_HPP
-#define OR_HPP
+#ifndef COMPONENTAND_HPP
+#define COMPONENTAND_HPP
 
 #include "../../AComponent.hpp"
 
 namespace nts {
-    class Or : public AComponent {
+    class ComponentAnd : public AComponent {
     public:
         Tristate compute(std::size_t pin) override;
     };
 }
 
-
-#endif //OR_HPP
+#endif //COMPONENTAND_HPP

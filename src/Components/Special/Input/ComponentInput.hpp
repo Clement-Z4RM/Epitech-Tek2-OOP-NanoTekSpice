@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** And.hpp
+** ComponentInput.hpp
 */
 
-#ifndef NANOTEKSPICE_AND_HPP
-#define NANOTEKSPICE_AND_HPP
+#ifndef COMPONENTINPUT_HPP
+#define COMPONENTINPUT_HPP
 
 #include "../../AComponent.hpp"
 
 namespace nts {
-    class AndComponent : public AComponent {
+    class ComponentInput : public AComponent {
     public:
         Tristate compute(std::size_t pin) override;
     };
 }
 
-#endif //NANOTEKSPICE_AND_HPP
+#endif //COMPONENTINPUT_HPP

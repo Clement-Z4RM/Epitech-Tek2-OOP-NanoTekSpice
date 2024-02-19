@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Xor.hpp
+** ComponentFalse.hpp
 */
 
-#ifndef XOR_HPP
-#define XOR_HPP
+#ifndef FALSECOMPONENT_HPP_
+#define FALSECOMPONENT_HPP_
 
 #include "../../AComponent.hpp"
 
 namespace nts {
-    class Xor : public AComponent {
+    class ComponentFalse : public AComponent {
     public:
         Tristate compute(std::size_t pin) override;
     };
 }
 
-#endif //XOR_HPP
+#endif /* !FALSECOMPONENT_HPP_ */

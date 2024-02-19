@@ -2,16 +2,16 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Clock.hpp
+** ComponentClock.hpp
 */
 
-#ifndef CLOCK_HPP
-#define CLOCK_HPP
+#ifndef COMPONENTCLOCK_HPP
+#define COMPONENTCLOCK_HPP
 
 #include "../../AComponent.hpp"
 
 namespace nts {
-    class Clock : public AComponent {
+    class ComponentClock : public AComponent {
         Tristate compute(std::size_t pin) override;
         void updateState(bool state);
     private:
@@ -19,4 +19,4 @@ namespace nts {
     };
 }
 
-#endif //CLOCK_HPP
+#endif //COMPONENTCLOCK_HPP

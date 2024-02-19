@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** True.cpp
+** ComponentTrue.cpp
 */
 
-#include "True.hpp"
+#include "ComponentTrue.hpp"
 
-nts::Tristate nts::TrueComponent::compute(std::size_t pin) {
+nts::Tristate nts::ComponentTrue::compute(std::size_t pin) {
     if (pin == 1)
         return True;
     return Undefined;

@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** False.cpp
+** ComponentFalse.cpp
 */
 
-#include "False.hpp"
+#include "ComponentFalse.hpp"
 
-nts::Tristate nts::FalseComponent::compute(std::size_t pin) {
+nts::Tristate nts::ComponentFalse::compute(std::size_t pin) {
     if (pin == 1)
         return False;
     return Undefined;

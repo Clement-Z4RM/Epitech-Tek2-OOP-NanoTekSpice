@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Input.cpp
+** ComponentInput.cpp
 */
 
-#include "Input.hpp"
+#include "ComponentInput.hpp"
 
-nts::Tristate nts::Input::compute(std::size_t pin) {
+nts::Tristate nts::ComponentInput::compute(std::size_t pin) {
     if (pin == 1)
         return True;
     return Undefined;

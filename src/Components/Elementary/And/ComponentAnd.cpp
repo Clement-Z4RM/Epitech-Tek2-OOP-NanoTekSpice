@@ -2,13 +2,13 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Or.cpp
+** ComponentAnd.cpp
 */
 
-#include "Or.hpp"
+#include "ComponentAnd.hpp"
+#include <iostream>
 
-nts::Tristate nts::Or::compute(std::size_t pin)
-{
+nts::Tristate nts::ComponentAnd::compute(std::size_t pin) {
     Tristate state1 = at(1);
     Tristate state2 = at(2);
 
@@ -18,7 +18,7 @@ nts::Tristate nts::Or::compute(std::size_t pin)
         case 2:
             return state2;
         case 3:
-            return state1 || state2;
+            return state1 && state2;
         default:
             return Undefined;
     }

@@ -2,13 +2,12 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** And.cpp
+** Xor.cpp
 */
 
-#include "And.hpp"
-#include <iostream>
+#include "ComponentXor.hpp"
 
-nts::Tristate nts::AndComponent::compute(std::size_t pin) {
+nts::Tristate nts::ComponentXor::compute(std::size_t pin) {
     Tristate state1 = at(1);
     Tristate state2 = at(2);
 
@@ -18,7 +17,7 @@ nts::Tristate nts::AndComponent::compute(std::size_t pin) {
         case 2:
             return state2;
         case 3:
-            return state1 && state2;
+            return (state1 != state2) ? True : False;
         default:
             return Undefined;
     }

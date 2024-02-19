@@ -8,36 +8,36 @@ include_directories(include)
 set(NANOTEKSPICE_SOURCES
         src/Main.cpp
         src/NanoTekSpice.cpp
-        src/Components/Elementary/And/And.cpp
-        src/Components/Elementary/And/And.hpp
+        src/Components/Elementary/And/ComponentAnd.cpp
+        src/Components/Elementary/And/ComponentAnd.hpp
         src/Components/AComponent.cpp
         src/Components/AComponent.hpp
         src/Components/IComponent.cpp
         src/Components/IComponent.hpp
-        src/Components/Elementary/Not/Not.cpp
-        src/Components/Elementary/Not/Not.hpp
-        src/Components/Special/False/False.cpp
-        src/Components/Special/False/False.hpp
-        src/Components/Special/True/True.cpp
-        src/Components/Special/True/True.hpp
-        src/Components/Elementary/Or/Or.cpp
-        src/Components/Elementary/Or/Or.hpp
-        src/Components/Elementary/Xor/Xor.cpp
-        src/Components/Elementary/Xor/Xor.hpp
-        src/Components/Special/Input/Input.cpp
-        src/Components/Special/Input/Input.hpp
-        src/Components/Special/Output/Output.cpp
-        src/Components/Special/Output/Output.hpp
-        src/Components/Special/Clock/Clock.cpp
-        src/Components/Special/Clock/Clock.hpp)
+        src/Components/Elementary/Not/ComponentNot.cpp
+        src/Components/Elementary/Not/ComponentNot.hpp
+        src/Components/Special/False/ComponentFalse.cpp
+        src/Components/Special/False/ComponentFalse.hpp
+        src/Components/Special/True/ComponentTrue.cpp
+        src/Components/Special/True/ComponentTrue.hpp
+        src/Components/Elementary/Or/ComponentOr.cpp
+        src/Components/Elementary/Or/ComponentOr.hpp
+        src/Components/Elementary/Xor/ComponentXor.cpp
+        src/Components/Elementary/Xor/ComponentXor.hpp
+        src/Components/Special/Input/ComponentInput.cpp
+        src/Components/Special/Input/ComponentInput.hpp
+        src/Components/Special/Output/ComponentOutput.cpp
+        src/Components/Special/Output/ComponentOutput.hpp
+        src/Components/Special/Clock/ComponentClock.cpp
+        src/Components/Special/Clock/ComponentClock.hpp)
 
 set(UNIT_TESTS_SOURCES
         tests/test_or_gate.cpp
         tests/test_clock.cpp
         tests/test_bad.cpp
         tests/test_no_argument.cpp
-        src/Components/Elementary/Or/Or.cpp
-        src/Components/Elementary/Or/Or.hpp)
+        src/Components/Elementary/Or/ComponentOr.cpp
+        src/Components/Elementary/Or/ComponentOr.hpp)
 
 add_executable(nanotekspice ${NANOTEKSPICE_SOURCES})
 

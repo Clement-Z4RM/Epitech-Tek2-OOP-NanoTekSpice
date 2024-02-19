@@ -2,19 +2,20 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Not.hpp
+** ComponentOr.hpp
 */
 
-#ifndef NOTCOMPONENT_HPP_
-#define NOTCOMPONENT_HPP_
+#ifndef COMPONENTOR_HPP
+#define COMPONENTOR_HPP
 
 #include "../../AComponent.hpp"
 
 namespace nts {
-    class NotComponent : public AComponent {
+    class ComponentOr : public AComponent {
     public:
         Tristate compute(std::size_t pin) override;
     };
 }
 
-#endif /* !NOTCOMPONENT_HPP_ */
+
+#endif //COMPONENTOR_HPP

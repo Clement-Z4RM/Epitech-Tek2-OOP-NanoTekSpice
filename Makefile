@@ -15,15 +15,15 @@ SRC			=	src/Main.cpp			\
 				src/NanoTekSpice.cpp	\
 				src/Components/AComponent.cpp	\
 				src/Components/IComponent.cpp	\
-				src/Components/Elementary/And/And.cpp	\
-				src/Components/Elementary/Not/Not.cpp	\
-				src/Components/Special/False/False.cpp	\
-				src/Components/Special/True/True.cpp	\
-				src/Components/Elementary/Or/Or.cpp		\
-                src/Components/Elementary/Xor/Xor.cpp	\
-                src/Components/Special/Input/Input.cpp	\
-                src/Components/Special/Output/Output.cpp	\
-                src/Components/Special/Clock/Clock.cpp
+				src/Components/Elementary/And/ComponentAnd.cpp	\
+				src/Components/Elementary/Not/ComponentNot.cpp	\
+				src/Components/Special/False/ComponentFalse.cpp	\
+				src/Components/Special/True/ComponentTrue.cpp	\
+				src/Components/Elementary/Or/ComponentOr.cpp		\
+                src/Components/Elementary/Xor/ComponentXor.cpp	\
+                src/Components/Special/Input/ComponentInput.cpp	\
+                src/Components/Special/Output/ComponentOutput.cpp	\
+                src/Components/Special/Clock/ComponentClock.cpp
 
 OBJ			=	$(SRC:.cpp=.o)
 

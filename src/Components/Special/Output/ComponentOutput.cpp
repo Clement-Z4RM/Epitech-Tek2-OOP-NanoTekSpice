@@ -2,17 +2,17 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Output.cpp
+** ComponentOutput.cpp
 */
 
-#include "Output.hpp"
+#include "ComponentOutput.hpp"
 
-nts::Tristate nts::Output::compute(std::size_t pin) {
+nts::Tristate nts::ComponentOutput::compute(std::size_t pin) {
     if (pin == 1 && _returnValue != Undefined)
         return _returnValue;
     return Undefined;
 }
 
-void nts::Output::setValue(nts::Tristate value) {
+void nts::ComponentOutput::setValue(nts::Tristate value) {
     _returnValue = value;
 }

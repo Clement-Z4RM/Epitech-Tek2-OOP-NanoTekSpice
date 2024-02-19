@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** False.hpp
+** ComponentTrue.hpp
 */
 
-#ifndef FALSECOMPONENT_HPP_
-#define FALSECOMPONENT_HPP_
+#ifndef COMPONENTTRUE_HPP_
+#define COMPONENTTRUE_HPP_
 
 #include "../../AComponent.hpp"
 
 namespace nts {
-    class FalseComponent : public AComponent {
+    class ComponentTrue : public AComponent {
     public:
         Tristate compute(std::size_t pin) override;
     };
 }
 
-#endif /* !FALSECOMPONENT_HPP_ */
+#endif /* !COMPONENTTRUE_HPP_ */

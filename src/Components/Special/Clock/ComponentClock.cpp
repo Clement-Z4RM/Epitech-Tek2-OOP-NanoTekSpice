@@ -2,17 +2,17 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Clock.cpp
+** ComponentClock.cpp
 */
 
-#include "Clock.hpp"
+#include "ComponentClock.hpp"
 
-nts::Tristate nts::Clock::compute(std::size_t pin) {
+nts::Tristate nts::ComponentClock::compute(std::size_t pin) {
     if (pin == 1)
         return _state ? True : False;
     return Undefined;
 }
 
-void nts::Clock::updateState(bool state) {
+void nts::ComponentClock::updateState(bool state) {
     _state = state;
 }

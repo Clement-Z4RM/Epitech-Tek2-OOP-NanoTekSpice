@@ -2,16 +2,16 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Output.hpp
+** ComponentOutput.hpp
 */
 
-#ifndef OUTPUT_HPP
-#define OUTPUT_HPP
+#ifndef COMPONENTOUTPUT_HPP
+#define COMPONENTOUTPUT_HPP
 
 #include "../../AComponent.hpp"
 
 namespace nts {
-    class Output : public AComponent {
+    class ComponentOutput : public AComponent {
     public:
         Tristate compute(std::size_t pin) override;
         void setValue(Tristate value);
@@ -20,4 +20,4 @@ namespace nts {
     };
 }
 
-#endif //OUTPUT_HPP
+#endif //COMPONENTOUTPUT_HPP
