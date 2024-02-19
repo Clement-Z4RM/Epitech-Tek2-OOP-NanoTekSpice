@@ -7,11 +7,38 @@
 
 #include <iostream>
 #include "NanoTekSpice.hpp"
+#include "Parsing/Config/Config.hpp"
+#include "Circuit/Circuit.hpp"
+#include "Shell/Shell.hpp"
 
-int nts::NanoTekSpice::run([[maybe_unused]] const char *argv[]) {
-    if (!argv[1]) {
-        std::cerr << argv[0] << ": No file provided" << std::endl;
+int nts::NanoTekSpice::run(int argc, const char *argv[]) {
+    if (argc == 1) {
+        std::cerr << program_invocation_name << ": No file provided." << std::endl;
         return 84;
     }
+
+    Config config((std::string(argv[1])));
+    if (!config.isOpen())
+        return 84;
+
+    Circuit circuit;
+    try {
+        circuit.loadConfig(config);
+    } catch (const Circuit::Error &exception) {
+        std::cerr << program_invocation_name << ": " << config.getFilename() << ": " << exception.what() << "." << std::endl;
+        return 84;
+    }
+    if (!circuit.isLoaded())
+        return 84;
+
+    Shell::run();
     return 0;
+}
+
+void nts::NanoTekSpice::help() {
+    std::cout << "\33[1mNanoTekSpice - Logic simulator\33[0m" << std::endl << std::endl
+              << "Usage: " << program_invocation_name << " CONFIG_FILE" << std::endl << std::endl
+              << "Description" << std::endl
+              << "\tCONFIG_FILE\tFile containing the graph description" << std::endl;
+    std::exit(0);
 }
