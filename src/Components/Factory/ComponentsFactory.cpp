@@ -14,13 +14,17 @@
 namespace nts {
     class SampleComponent : public IComponent {
     public:
-        explicit SampleComponent(std::string name) : _name(std::move(name)) {};
+        explicit SampleComponent(Component type) : _type(type) {};
 
-        void simulate([[maybe_unused]] std::size_t tick) override {
-            std::cout << _name << std::endl;
+        [[nodiscard]] Component getType() const override {
+            return _type;
         }
 
-        Tristate compute([[maybe_unused]] std::size_t pin) override {
+        void simulate([[maybe_unused]] std::size_t tick) override {
+            std::cout << _type << std::endl;
+        }
+
+        [[nodiscard]] Tristate compute([[maybe_unused]] std::size_t pin) override {
             return Tristate::Undefined;
         }
 
@@ -28,7 +32,7 @@ namespace nts {
                      [[maybe_unused]] std::size_t otherPin) override {}
 
     private:
-        std::string _name;
+        Component _type;
     };
 }
 
@@ -36,39 +40,39 @@ const std::unordered_map<std::string, std::function<std::unique_ptr<nts::ICompon
 
         nts::ComponentsFactory::_components = {
         // Special components
-        {"input",  []() { return std::make_unique<SampleComponent>("input"); }},
-        {"output", []() { return std::make_unique<SampleComponent>("output"); }},
-        {"true",   []() { return std::make_unique<SampleComponent>("true"); }},
-        {"false",  []() { return std::make_unique<SampleComponent>("false"); }},
-        {"clock",  []() { return std::make_unique<SampleComponent>("clock"); }},
+        {"input",  []() { return std::make_unique<SampleComponent>(_input); }},
+        {"output", []() { return std::make_unique<SampleComponent>(_output); }},
+        {"true",   []() { return std::make_unique<SampleComponent>(_true); }},
+        {"false",  []() { return std::make_unique<SampleComponent>(_false); }},
+        {"clock",  []() { return std::make_unique<SampleComponent>(_clock); }},
 
         // Elementary components
-        {"and",    []() { return std::make_unique<SampleComponent>("and"); }},
-        {"or",     []() { return std::make_unique<SampleComponent>("or"); }},
-        {"xor",    []() { return std::make_unique<SampleComponent>("xor"); }},
-        {"not",    []() { return std::make_unique<SampleComponent>("not"); }},
+        {"and",    []() { return std::make_unique<SampleComponent>(_and); }},
+        {"or",     []() { return std::make_unique<SampleComponent>(_or); }},
+        {"xor",    []() { return std::make_unique<SampleComponent>(_xor); }},
+        {"not",    []() { return std::make_unique<SampleComponent>(_not); }},
 
         // Gates components
-        {"4001",   []() { return std::make_unique<SampleComponent>("4001"); }},
-        {"4011",   []() { return std::make_unique<SampleComponent>("4011"); }},
-        {"4030",   []() { return std::make_unique<SampleComponent>("4030"); }},
-        {"4069",   []() { return std::make_unique<SampleComponent>("4069"); }},
-        {"4071",   []() { return std::make_unique<SampleComponent>("4071"); }},
-        {"4081",   []() { return std::make_unique<SampleComponent>("4081"); }},
+        {"4001",   []() { return std::make_unique<SampleComponent>(_4001); }},
+        {"4011",   []() { return std::make_unique<SampleComponent>(_4011); }},
+        {"4030",   []() { return std::make_unique<SampleComponent>(_4030); }},
+        {"4069",   []() { return std::make_unique<SampleComponent>(_4069); }},
+        {"4071",   []() { return std::make_unique<SampleComponent>(_4071); }},
+        {"4081",   []() { return std::make_unique<SampleComponent>(_4081); }},
 
         // Advanced components
-        {"4008",   []() { return std::make_unique<SampleComponent>("4008"); }},
-        {"4013",   []() { return std::make_unique<SampleComponent>("4013"); }},
-        {"4017",   []() { return std::make_unique<SampleComponent>("4017"); }},
-        {"4040",   []() { return std::make_unique<SampleComponent>("4040"); }},
-        {"4094",   []() { return std::make_unique<SampleComponent>("4094"); }},
-        {"4512",   []() { return std::make_unique<SampleComponent>("4512"); }},
-        {"4514",   []() { return std::make_unique<SampleComponent>("4514"); }},
-        {"4801",   []() { return std::make_unique<SampleComponent>("4801"); }},
-        {"2716",   []() { return std::make_unique<SampleComponent>("2716"); }},
+        {"4008",   []() { return std::make_unique<SampleComponent>(_4008); }},
+        {"4013",   []() { return std::make_unique<SampleComponent>(_4013); }},
+        {"4017",   []() { return std::make_unique<SampleComponent>(_4017); }},
+        {"4040",   []() { return std::make_unique<SampleComponent>(_4040); }},
+        {"4094",   []() { return std::make_unique<SampleComponent>(_4094); }},
+        {"4512",   []() { return std::make_unique<SampleComponent>(_4512); }},
+        {"4514",   []() { return std::make_unique<SampleComponent>(_4514); }},
+        {"4801",   []() { return std::make_unique<SampleComponent>(_4801); }},
+        {"2716",   []() { return std::make_unique<SampleComponent>(_2716); }},
 
         // Logger
-        {"logger", []() { return std::make_unique<SampleComponent>("logger"); }}
+        {"logger", []() { return std::make_unique<SampleComponent>(_logger); }}
 };
 
 std::unique_ptr<nts::IComponent> nts::ComponentsFactory::createComponent(const std::string &type) {
