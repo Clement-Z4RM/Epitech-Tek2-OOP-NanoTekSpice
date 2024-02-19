@@ -28,7 +28,7 @@ namespace nts {
             return Tristate::Undefined;
         }
 
-        void setLink([[maybe_unused]] std::size_t pin, [[maybe_unused]] IComponent &other,
+        void setLink([[maybe_unused]] std::size_t pin, [[maybe_unused]] std::unique_ptr<IComponent> &other,
                      [[maybe_unused]] std::size_t otherPin) override {}
 
     private:
