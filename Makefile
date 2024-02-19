@@ -24,7 +24,8 @@ SRC			=	src/Main.cpp			\
                 src/Components/Special/Input/ComponentInput.cpp	\
                 src/Components/Special/Output/ComponentOutput.cpp	\
                 src/Components/Special/Clock/ComponentClock.cpp	\
-                src/Components/Gates/4001/Component4001.cpp
+                src/Components/Gates/4001/Component4001.cpp	\
+                src/Components/Gates/4011/Component4011.cpp
 
 OBJ			=	$(SRC:.cpp=.o)
 
