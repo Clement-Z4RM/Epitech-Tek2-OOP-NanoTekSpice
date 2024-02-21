@@ -34,7 +34,7 @@ const char *nts::Circuit::Error::what() const noexcept {
     return _message.c_str();
 }
 
-nts::Circuit::Circuit() : _isLoaded(false) {
+nts::Circuit::Circuit() : _isLoaded(false), _tick(0) {
     _partsFunctions["chipsets"] = &nts::Circuit::_chipsetFunction;
     _partsFunctions["links"] = &nts::Circuit::_linkFunction;
 }
@@ -51,6 +51,10 @@ const std::unordered_map<std::string, std::unique_ptr<nts::IComponent>> &nts::Ci
     if (!_isLoaded)
         throw Error(Error::ERRORS[Error::NotLoadedConfig]);
     return _components;
+}
+
+unsigned int nts::Circuit::getTick() const {
+    return _tick;
 }
 
 void nts::Circuit::loadConfig(nts::Config &config) {
@@ -164,4 +168,9 @@ void nts::Circuit::setInputValue(const std::string &componentName, char value) {
             return;
     }
     component1->updateState(state);
+}
+
+// TODO
+void nts::Circuit::simulate() {
+    ++_tick;
 }

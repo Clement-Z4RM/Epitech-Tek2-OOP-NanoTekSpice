@@ -49,7 +49,7 @@ bool nts::Shell::_exit([[maybe_unused]] Circuit &circuit) {
 bool nts::Shell::_display(Circuit &circuit) {
     const std::unordered_map<std::string, std::unique_ptr<nts::IComponent>> &components = circuit.getComponents();
 
-    std::cout << "tick: " << std::endl; // TODO: add tick
+    std::cout << "tick: " << circuit.getTick() << std::endl;
     std::cout << "input(s):" << std::endl;
     for (const auto &item: components)
         if (item.second->getType() == _input || item.second->getType() == _clock)
@@ -78,7 +78,8 @@ bool nts::Shell::_changeInputValue(const std::string &command, Circuit &circuit)
     return true;
 }
 
-bool nts::Shell::_simulate([[maybe_unused]] Circuit &circuit) {
+bool nts::Shell::_simulate(Circuit &circuit) {
+    circuit.simulate();
     return true;
 }
 
