@@ -16,6 +16,7 @@ const std::string nts::Circuit::Error::ERRORS[] = {
         "The configuration is already loaded",
         "The configuration is not loaded",
         "The specified configuration is invalid (no file open)",
+        "Configuration line before part",
         "Unknown part name",
         "Unknown component type",
         "Unknown component name",
@@ -23,9 +24,7 @@ const std::string nts::Circuit::Error::ERRORS[] = {
         "Invalid link line format",
         "Pin linked to itself",
         "Input linked to another input",
-        "Input linked to output",
         "Output linked to another output",
-        "Output linked to input",
         "No chipset found in the configuration file"
 };
 
@@ -35,7 +34,7 @@ const char *nts::Circuit::Error::what() const noexcept {
     return _message.c_str();
 }
 
-nts::Circuit::Circuit() : _isLoaded(false) {
+nts::Circuit::Circuit() : _isLoaded(false), _tick(0) {
     _partsFunctions["chipsets"] = &nts::Circuit::_chipsetFunction;
     _partsFunctions["links"] = &nts::Circuit::_linkFunction;
 }
@@ -52,6 +51,10 @@ const std::unordered_map<std::string, std::unique_ptr<nts::IComponent>> &nts::Ci
     if (!_isLoaded)
         throw Error(Error::ERRORS[Error::NotLoadedConfig]);
     return _components;
+}
+
+unsigned int nts::Circuit::getTick() const {
+    return _tick;
 }
 
 void nts::Circuit::loadConfig(nts::Config &config) {
@@ -72,7 +75,8 @@ void nts::Circuit::loadConfig(nts::Config &config) {
             buffer[hashtagIndex] = '\0';
             buffer.resize(hashtagIndex);
         }
-        if (buffer.empty() || std::regex_match(buffer, std::regex("^[[:blank:]]+$")))
+        buffer = Utilities::trim(buffer);
+        if (buffer.empty())
             continue;
         if (buffer.starts_with('.') && buffer.ends_with(':')) {
             currentPart = buffer.substr(1, buffer.size() - 2);
@@ -80,6 +84,8 @@ void nts::Circuit::loadConfig(nts::Config &config) {
                 throw Error(Error::ERRORS[Error::UnknownPart] + " '" + currentPart + "'");
             continue;
         }
+        if (currentPart.empty())
+            throw Error(Error::ERRORS[Error::LineBeforePart]);
         (this->*(_partsFunctions[currentPart]))(buffer);
     }
     if (_components.empty())
@@ -89,7 +95,7 @@ void nts::Circuit::loadConfig(nts::Config &config) {
 }
 
 void nts::Circuit::_chipsetFunction(const std::string &line) {
-    if (!std::regex_match(line, std::regex(R"(^[[:blank:]]*[[:alnum:]]{2,}[[:blank:]]+\w+[[:blank:]]*$)")))
+    if (!std::regex_match(line, std::regex(R"(^\w+[[:blank:]]+\w+$)")))
         throw Error(Error::ERRORS[Error::InvalidChipsetLineFormat] + " '" + line + "'");
 
     std::vector<std::string> tokens = Utilities::splitLine(line);
@@ -100,8 +106,8 @@ void nts::Circuit::_chipsetFunction(const std::string &line) {
     _components[tokens[COMPONENT_NAME]] = ComponentsFactory::createComponent(tokens[COMPONENT_TYPE]);
 }
 
-void nts::Circuit::_linkFunction([[maybe_unused]] const std::string &line) {
-    if (!std::regex_match(line, std::regex(R"(^[[:blank:]]*\w+:\d+[[:blank:]]+\w+:\d+[[:blank:]]*$)")))
+void nts::Circuit::_linkFunction(const std::string &line) {
+    if (!std::regex_match(line, std::regex(R"(^\w+:\d+[[:blank:]]+\w+:\d+$)")))
         throw Error(Error::ERRORS[Error::InvalidLinkLineFormat] + " '" + line + "'");
 
     std::vector<std::string> tokens = Utilities::splitLine(line);
@@ -118,16 +124,10 @@ void nts::Circuit::_linkFunction([[maybe_unused]] const std::string &line) {
     std::unique_ptr<IComponent> &component1 = _components.at(pin1[NAME]);
     std::unique_ptr<IComponent> &component2 = _components.at(pin2[NAME]);
 
-    Component type1 = component1->getType();
-    if (type1 == _input || type1 == _output)
-        switch (component2->getType()) {
-            case _input:
-                throw Error(Error::ERRORS[type1 == _input ? Error::InputLinkedToInput : Error::OutputLinkedToInput] + ": '" + pin1[NAME] + "' and '" + pin2[NAME] + "'");
-            case _output:
-                throw Error(Error::ERRORS[type1 == _input ? Error::InputLinkedToOutput : Error::OutputLinkedToOutput] + ": '" + pin1[NAME] + "' and '" + pin2[NAME] + "'");
-            default:
-                break;
-        }
+    if (component1->getType() == _input && component2->getType() == _input)
+        throw Error(Error::ERRORS[Error::InputLinkedToInput] + ": '" + pin1[NAME] + "' and '" + pin2[NAME] + "'");
+    else if (component1->getType() == _output && component2->getType() == _output)
+        throw Error(Error::ERRORS[Error::OutputLinkedToOutput] + ": '" + pin1[NAME] + "' and '" + pin2[NAME] + "'");
 
     try {
         component1->setLink(std::stoi(pin1[PIN]), component2, std::stoi(pin2[PIN]));
@@ -168,4 +168,9 @@ void nts::Circuit::setInputValue(const std::string &componentName, char value) {
             return;
     }
     component1->updateState(state);
+}
+
+// TODO
+void nts::Circuit::simulate() {
+    ++_tick;
 }

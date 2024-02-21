@@ -33,6 +33,7 @@ namespace nts {
                 LoadedConfig,
                 NotLoadedConfig,
                 ClosedFileConfig,
+                LineBeforePart,
                 UnknownPart,
                 UnknownComponentType,
                 UnknownComponentName,
@@ -40,9 +41,7 @@ namespace nts {
                 InvalidLinkLineFormat,
                 LinkToItself,
                 InputLinkedToInput,
-                InputLinkedToOutput,
                 OutputLinkedToOutput,
-                OutputLinkedToInput,
                 NoChipset
             };
 
@@ -65,11 +64,15 @@ namespace nts {
 
         [[nodiscard]] const std::unordered_map<std::string, std::unique_ptr<IComponent>> &getComponents() const;
 
+        [[nodiscard]] unsigned int getTick() const;
+
         void loadConfig(Config &config);
 
         [[nodiscard]] bool containsComponent(const std::string &name) const;
 
         void setInputValue(const std::string &componentName, char value);
+
+        void simulate();
 
     private:
         bool _isLoaded;
@@ -77,6 +80,8 @@ namespace nts {
 
         // TODO: map for display command (ASCII order)?
         std::unordered_map<std::string, std::unique_ptr<IComponent>> _components;
+
+        unsigned int _tick;
 
         void _chipsetFunction(const std::string &line);
 
