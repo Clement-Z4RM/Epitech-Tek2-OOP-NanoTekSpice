@@ -47,13 +47,15 @@ bool nts::Circuit::isLoaded() const {
     return _isLoaded;
 }
 
-const std::unordered_map<std::string, std::unique_ptr<nts::IComponent>> &nts::Circuit::getComponents() const {
+const std::map<std::string, std::unique_ptr<nts::IComponent>> &nts::Circuit::getComponents() const {
     if (!_isLoaded)
         throw Error(Error::ERRORS[Error::NotLoadedConfig]);
     return _components;
 }
 
 unsigned int nts::Circuit::getTick() const {
+    if (!_isLoaded)
+        throw Error(Error::ERRORS[Error::NotLoadedConfig]);
     return _tick;
 }
 
@@ -172,5 +174,7 @@ void nts::Circuit::setInputValue(const std::string &componentName, char value) {
 
 // TODO
 void nts::Circuit::simulate() {
+    if (!_isLoaded)
+        throw Error(Error::ERRORS[Error::NotLoadedConfig]);
     ++_tick;
 }

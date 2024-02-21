@@ -51,9 +51,7 @@ namespace nts {
     };
 }
 
-const std::unordered_map<std::string, std::function<std::unique_ptr<nts::IComponent>()>>
-
-        nts::ComponentsFactory::_components = {
+const std::unordered_map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> nts::ComponentsFactory::_components = {
         // Special components
         {"input",  []() { return std::make_unique<SampleComponent>(_input); }},
         {"output", []() { return std::make_unique<SampleComponent>(_output); }},

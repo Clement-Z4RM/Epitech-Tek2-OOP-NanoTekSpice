@@ -47,7 +47,7 @@ bool nts::Shell::_exit([[maybe_unused]] Circuit &circuit) {
 }
 
 bool nts::Shell::_display(Circuit &circuit) {
-    const std::unordered_map<std::string, std::unique_ptr<nts::IComponent>> &components = circuit.getComponents();
+    const std::map<std::string, std::unique_ptr<nts::IComponent>> &components = circuit.getComponents();
 
     std::cout << "tick: " << circuit.getTick() << std::endl;
     std::cout << "input(s):" << std::endl;
