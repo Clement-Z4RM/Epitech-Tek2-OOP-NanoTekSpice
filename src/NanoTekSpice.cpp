@@ -17,7 +17,7 @@ int nts::NanoTekSpice::run(int argc, const char *argv[]) {
         return 84;
     }
 
-    Config config((std::string(argv[1])), std::string(argv[1]));
+    Config config((std::string(argv[0])), std::string(argv[1]));
     if (!config.isOpen())
         return 84;
 

@@ -19,8 +19,12 @@ nts::Config::Config(const std::string &programInvocationName, std::string filena
     }
     if (_filename == "-h" || _filename == "--help")
         nts::NanoTekSpice::help(programInvocationName);
+    errno = 0;
     if (!std::filesystem::is_regular_file(_filename)) {
-        std::cerr << programInvocationName << ": " << _filename << ": Not a regular file." << std::endl;
+        if (errno)
+            std::cerr << programInvocationName << ": " << _filename << ": " << std::strerror(errno) << "." << std::endl;
+        else
+            std::cerr << programInvocationName << ": " << _filename << ": Not a regular file." << std::endl;
         return;
     }
     _file.open(_filename);
