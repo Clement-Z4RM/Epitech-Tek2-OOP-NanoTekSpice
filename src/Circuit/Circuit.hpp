@@ -33,6 +33,7 @@ namespace nts {
                 LoadedConfig,
                 NotLoadedConfig,
                 ClosedFileConfig,
+                LineBeforePart,
                 UnknownPart,
                 UnknownComponentType,
                 UnknownComponentName,
@@ -40,9 +41,7 @@ namespace nts {
                 InvalidLinkLineFormat,
                 LinkToItself,
                 InputLinkedToInput,
-                InputLinkedToOutput,
                 OutputLinkedToOutput,
-                OutputLinkedToInput,
                 NoChipset
             };
 
