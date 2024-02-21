@@ -84,13 +84,23 @@ bool nts::Shell::_simulate([[maybe_unused]] Circuit &circuit) {
 
 volatile bool loop;
 bool nts::Shell::_loop([[maybe_unused]] Circuit &circuit) {
-    loop = true;
-    signal(SIGINT, [](int) { loop = false; });
+    struct sigaction sa{};
+    sa.sa_handler = [](int) { loop = false; };
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    if (sigaction(SIGINT, &sa, nullptr) == -1) {
+        std::perror("sigaction");
+        return true;
+    }
 
+    loop = true;
     while (loop) {
         _simulate(circuit);
         _display(circuit);
+        sleep(1);
     }
-    signal(SIGINT, SIG_DFL);
+    sa.sa_handler = SIG_DFL;
+    if (sigaction(SIGINT, &sa, nullptr) == -1)
+        std::perror("sigaction");
     return true;
 }
