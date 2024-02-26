@@ -19,11 +19,11 @@ static void redirectAllStd() {
 
 Test(nts, no_argument, .init = redirectAllStd)
 {
-    cr_assert_eq(nts::NanoTekSpice::run(ARGV), 84);
+    cr_assert_eq(nts::NanoTekSpice::run(1, ARGV), 84);
 
     std::cout.flush();
     std::cerr.flush();
 
     cr_assert_stdout_eq_str("");
-    cr_assert_stderr_eq_str("./nanotekspice: No file provided\n");
+    cr_assert_stderr_eq_str("./nanotekspice: No file provided.\n");
 }

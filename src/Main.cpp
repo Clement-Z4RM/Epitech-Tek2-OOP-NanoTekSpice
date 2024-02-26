@@ -7,6 +7,6 @@
 
 #include "NanoTekSpice.hpp"
 
-int main([[maybe_unused]] int argc, const char *argv[]) {
-    return nts::NanoTekSpice::run(argv);
+int main(int argc, const char *argv[]) {
+    return nts::NanoTekSpice::run(argc, argv);
 }
