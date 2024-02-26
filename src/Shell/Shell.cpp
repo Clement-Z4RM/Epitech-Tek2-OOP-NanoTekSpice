@@ -83,7 +83,7 @@ bool nts::Shell::_simulate(Circuit &circuit) {
     return true;
 }
 
-volatile bool loop;
+static volatile bool loop;
 bool nts::Shell::_loop([[maybe_unused]] Circuit &circuit) {
     struct sigaction sa{};
     sa.sa_handler = [](int) { loop = false; };
