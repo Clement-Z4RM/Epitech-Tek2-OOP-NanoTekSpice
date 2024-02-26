@@ -31,15 +31,12 @@ namespace nts {
         [[nodiscard]] virtual char getValue() const = 0;
 
         // TODO: remove
-        virtual void insert(std::size_t pin, std::unique_ptr<IComponent> &other, std::size_t otherPin) = 0;
+        virtual void insert(std::size_t pin, IComponent &other, std::size_t otherPin) = 0;
         [[nodiscard]] virtual Tristate at(std::size_t pin) const = 0;
-
-    protected:
-        std::map<std::size_t, Link> _links;
     };
 
     struct Link {
-        std::unique_ptr<IComponent> &other;
+        IComponent &other;
         std::size_t otherPin;
         Tristate state;
     };

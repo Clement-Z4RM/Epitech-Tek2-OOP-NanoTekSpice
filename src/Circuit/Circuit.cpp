@@ -9,6 +9,7 @@
 #include <iostream>
 #include <regex>
 #include "../Utilities/Utilities.hpp"
+#include "../Components/AComponent.hpp"
 #include "../Components/Factory/ComponentsFactory.hpp"
 #include "Circuit.hpp"
 
@@ -133,8 +134,8 @@ void nts::Circuit::_linkFunction(const std::string &line) {
 
     try {
         component1->setLink(std::stoi(pin1[PIN]), component2, std::stoi(pin2[PIN]));
-    } catch (...) {
-        // TODO: catch
+    } catch (AComponent::Error &exception) {
+        throw Error(exception.what() + std::string(": '") + line + "'");
     }
 }
 

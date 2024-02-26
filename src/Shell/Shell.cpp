@@ -36,7 +36,8 @@ bool nts::Shell::_executeCommand(const std::string &command, Circuit &circuit) {
     if (std::regex_match(command, std::regex(R"(^\w+=.*$)"))) {
         _changeInputValue(command, circuit);
         return true;
-    } else if (_commands.contains(command))
+    }
+    if (_commands.contains(command))
         return _commands.at(command)(circuit);
     std::cerr << command << ": Command not found." << std::endl;
     return true;
