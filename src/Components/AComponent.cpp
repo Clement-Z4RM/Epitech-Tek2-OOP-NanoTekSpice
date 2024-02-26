@@ -5,6 +5,8 @@
 ** AComponent.cpp
 */
 
+#include <functional>
+#include <utility>
 #include "AComponent.hpp"
 
 const std::string nts::AComponent::Error::ERRORS[] = {
@@ -18,6 +20,8 @@ nts::AComponent::Error::Error(std::string message) : _message(std::move(message)
 const char *nts::AComponent::Error::what() const noexcept {
     return _message.c_str();
 }
+
+nts::AComponent::AComponent(nts::Component type, std::size_t maxPin, Tristate state) : _state(state), _type(type), _maxPin(maxPin) {}
 
 void nts::AComponent::simulate([[maybe_unused]] std::size_t tick) {}
 
@@ -79,9 +83,15 @@ void nts::AComponent::updateState(nts::Tristate state) {
     _state = state;
 }
 
-    std::unique_ptr<IComponent> _this(this);
-    insert(pin, other, otherPin);
-    other->insert(otherPin, _this, pin);
+char nts::AComponent::getValue() const {
+    switch (_state) {
+        case True:
+            return '1';
+        case False:
+            return '0';
+        default:
+            return 'U';
+    }
 }
 
 /**
@@ -104,4 +114,20 @@ nts::Tristate nts::AComponent::at(std::size_t pin) const {
     if (_links.contains(pin))
         return _links.at(pin).state;
     return Undefined;
+}
+
+nts::Component nts::AComponent::getType() const {
+    return _type;
+}
+
+const std::map<std::size_t, nts::Link> &nts::AComponent::getLinks() const {
+    return _links;
+}
+
+std::size_t nts::AComponent::getMaxPin() const {
+    return _maxPin;
+}
+
+const std::vector<std::size_t> &nts::AComponent::getExcludedPins() const {
+    return _excludedPins;
 }
