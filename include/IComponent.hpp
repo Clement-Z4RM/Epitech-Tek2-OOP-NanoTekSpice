@@ -9,46 +9,12 @@
 #define NANOTEKSPICE_ICOMPONENT_HPP_
 
 #include <cstddef>
+#include <memory>
 #include <map>
+#include "NanoTekSpice.hpp"
 
 namespace nts {
-    enum Tristate {
-        Undefined = (-true),
-        True = true,
-        False = false
-    };
-
-    enum Component {
-        _input,
-        _output,
-        _true,
-        _false,
-        _clock,
-
-        _and,
-        _or,
-        _xor,
-        _not,
-
-        _4001,
-        _4011,
-        _4030,
-        _4069,
-        _4071,
-        _4081,
-
-        _4008,
-        _4013,
-        _4017,
-        _4040,
-        _4094,
-        _4512,
-        _4514,
-        _4801,
-        _2716,
-
-        _logger
-    };
+    struct Link;
 
     class IComponent {
     public:
@@ -63,6 +29,19 @@ namespace nts {
         // Only for inputs and clocks
         virtual void updateState(Tristate state) = 0;
         [[nodiscard]] virtual char getValue() const = 0;
+
+        // TODO: remove
+        virtual void insert(std::size_t pin, std::unique_ptr<IComponent> &other, std::size_t otherPin) = 0;
+        [[nodiscard]] virtual Tristate at(std::size_t pin) const = 0;
+
+    protected:
+        std::map<std::size_t, Link> _links;
+    };
+
+    struct Link {
+        std::unique_ptr<IComponent> &other;
+        std::size_t otherPin;
+        Tristate state;
     };
 }
 

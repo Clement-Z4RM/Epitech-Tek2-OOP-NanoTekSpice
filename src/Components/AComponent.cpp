@@ -26,8 +26,8 @@ void nts::AComponent::simulate([[maybe_unused]] std::size_t tick) {}
  * @param other The other component.
  * @param otherPin The pin of the other component.
  */
-void nts::AComponent::insert(std::size_t pin, nts::IComponent &other, std::size_t otherPin) {
-    Link link = {other, otherPin, other.compute(otherPin)};
+void nts::AComponent::insert(std::size_t pin, std::unique_ptr<IComponent> &other, std::size_t otherPin) {
+    Link link = {other, otherPin, other->compute(otherPin)};
     _links.insert(std::make_pair(pin, link));
 }
 
@@ -41,7 +41,7 @@ void nts::AComponent::insert(std::size_t pin, nts::IComponent &other, std::size_
  * @param other The other component.
  * @param otherPin The pin of the other component.
  */
-void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) {
+void nts::AComponent::setLink(std::size_t pin, std::unique_ptr<IComponent> &other, std::size_t otherPin) {
     // TODO handle multiple connections on otherPin
     if (_links.find(pin) != _links.end()) {
 //        Link link = _links.at(pin);
@@ -49,8 +49,10 @@ void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size
 //        link.other.erase(link.otherPin);
         // TODO: exit with error (multiple connections on same pin)
     }
+
+    std::unique_ptr<IComponent> _this(this);
     insert(pin, other, otherPin);
-    other.insert(otherPin, *this, pin);
+    other->insert(otherPin, _this, pin);
 }
 
 /**
@@ -66,7 +68,7 @@ nts::Tristate nts::AComponent::getLink(std::size_t pin) const {
 
     Link link = _links.at(pin);
 
-    return link.other.compute(link.otherPin);
+    return link.other->compute(link.otherPin);
 }
 
 nts::Tristate nts::AComponent::at(std::size_t pin) const {

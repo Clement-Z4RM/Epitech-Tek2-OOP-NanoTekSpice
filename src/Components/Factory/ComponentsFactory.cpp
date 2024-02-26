@@ -14,7 +14,7 @@
 namespace nts {
     class SampleComponent : public IComponent {
     public:
-        explicit SampleComponent(Component type) : _type(type), _state(Undefined) {};
+        explicit SampleComponent(Component type) : _type(type), _state(Undefined) {}
 
         [[nodiscard]] Component getType() const override {
             return _type;
@@ -43,6 +43,12 @@ namespace nts {
                 default:
                     return 'U';
             }
+        }
+
+        void insert([[maybe_unused]] std::size_t pin, [[maybe_unused]] std::unique_ptr<IComponent> &other, [[maybe_unused]] std::size_t otherPin) override {}
+
+        [[nodiscard]] Tristate at([[maybe_unused]] std::size_t pin) const override {
+            return _state;
         }
 
     private:

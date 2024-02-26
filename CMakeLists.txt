@@ -56,9 +56,7 @@ set(UNIT_TESTS_SOURCES
         tests/test_or_gate.cpp
         tests/test_clock.cpp
         tests/test_bad.cpp
-        tests/test_no_argument.cpp
-        src/Components/Elementary/Or/ComponentOr.cpp
-        src/Components/Elementary/Or/ComponentOr.hpp)
+        tests/test_no_argument.cpp)
 
 add_executable(nanotekspice ${NANOTEKSPICE_SOURCES})
 

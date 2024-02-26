@@ -11,6 +11,7 @@
 #include "Circuit/Circuit.hpp"
 #include "Shell/Shell.hpp"
 
+//region NanoTekSpice static methods
 int nts::NanoTekSpice::run(int argc, const char *argv[]) {
     if (argc == 1) {
         std::cerr << argv[0] << ": No file provided." << std::endl;
@@ -42,3 +43,28 @@ void nts::NanoTekSpice::help(const std::string &programInvocationName) {
               << "\tCONFIG_FILE\tFile containing the graph description" << std::endl;
     std::exit(0);
 }
+//endregion
+
+//region Tristate operators
+nts::Tristate nts::operator!(nts::Tristate state) {
+    if (state == Undefined)
+        return state;
+    return state ? False : True;
+}
+
+nts::Tristate nts::operator&&(nts::Tristate state1, nts::Tristate state2) {
+    if (state1 == False || state2 == False)
+        return False;
+    if (state1 == Undefined || state2 == Undefined)
+        return Undefined;
+    return True;
+}
+
+nts::Tristate nts::operator||(nts::Tristate state1, nts::Tristate state2) {
+    if (state1 == True || state2 == True)
+        return True;
+    if (state1 == Undefined || state2 == Undefined)
+        return Undefined;
+    return False;
+}
+//endregion
