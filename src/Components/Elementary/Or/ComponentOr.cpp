@@ -7,6 +7,8 @@
 
 #include "ComponentOr.hpp"
 
+nts::ComponentOr::ComponentOr() : AComponent(_or, 3) {}
+
 nts::Tristate nts::ComponentOr::compute(std::size_t pin)
 {
     Tristate state1 = at(1);

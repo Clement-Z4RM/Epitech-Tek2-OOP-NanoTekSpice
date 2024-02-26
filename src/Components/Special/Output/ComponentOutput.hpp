@@ -13,10 +13,12 @@
 namespace nts {
     class ComponentOutput : public AComponent {
     public:
+        ComponentOutput();
+
         Tristate compute(std::size_t pin) override;
-        void setValue(Tristate value);
+
     private:
-        Tristate _returnValue = Undefined;
+        Tristate _state = Undefined;
     };
 }
 

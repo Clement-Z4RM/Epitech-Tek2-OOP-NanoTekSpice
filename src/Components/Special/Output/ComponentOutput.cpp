@@ -7,12 +7,10 @@
 
 #include "ComponentOutput.hpp"
 
-nts::Tristate nts::ComponentOutput::compute(std::size_t pin) {
-    if (pin == 1 && _returnValue != Undefined)
-        return _returnValue;
-    return Undefined;
-}
+nts::ComponentOutput::ComponentOutput() : AComponent(_output, 1) {}
 
-void nts::ComponentOutput::setValue(nts::Tristate value) {
-    _returnValue = value;
+nts::Tristate nts::ComponentOutput::compute(std::size_t pin) {
+    if (pin == 1)
+        return _state;
+    return Undefined;
 }

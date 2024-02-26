@@ -5,16 +5,33 @@
 ** ComponentsFactory.cpp
 */
 
+#include "../AComponent.hpp"
+#include "../Special/Input/ComponentInput.hpp"
+#include "../Special/Output/ComponentOutput.hpp"
+#include "../Special/True/ComponentTrue.hpp"
+#include "../Special/False/ComponentFalse.hpp"
+#include "../Special/Clock/ComponentClock.hpp"
+#include "../Elementary/And/ComponentAnd.hpp"
+#include "../Elementary/Or/ComponentOr.hpp"
+#include "../Elementary/Xor/ComponentXor.hpp"
+#include "../Elementary/Not/ComponentNot.hpp"
+#include "../Gates/4001/Component4001.hpp"
+#include "../Gates/4011/Component4011.hpp"
+#include "../Gates/4030/Component4030.hpp"
+#include "../Gates/4069/Component4069.hpp"
+#include "../Gates/4071/Component4071.hpp"
+#include "../Gates/4081/Component4081.hpp"
 #include "ComponentsFactory.hpp"
 
-#include <utility>
 #include <iostream>
 
 // TODO: Use real components and replace std::unique_ptr<SampleComponent> with std::unique_ptr<COMPONENT>
 namespace nts {
-    class SampleComponent : public IComponent {
+    class SampleComponent : public AComponent {
     public:
-        explicit SampleComponent(Component type) : _type(type), _state(Undefined) {}
+        explicit SampleComponent(Component type) : AComponent(type, 13) {
+            _excludedPins.push_back(7);
+        }
 
         [[nodiscard]] Component getType() const override {
             return _type;
@@ -28,56 +45,34 @@ namespace nts {
             return Tristate::Undefined;
         }
 
-        void setLink([[maybe_unused]] std::size_t pin, [[maybe_unused]] std::unique_ptr<IComponent> &other, [[maybe_unused]] std::size_t otherPin) override {}
-
-        void updateState(Tristate state) override {
-            _state = state;
-        }
-
-        [[nodiscard]] char getValue() const override {
-            switch (_state) {
-                case True:
-                    return '1';
-                case False:
-                    return '0';
-                default:
-                    return 'U';
-            }
-        }
-
-        void insert([[maybe_unused]] std::size_t pin, [[maybe_unused]] std::unique_ptr<IComponent> &other, [[maybe_unused]] std::size_t otherPin) override {}
-
         [[nodiscard]] Tristate at([[maybe_unused]] std::size_t pin) const override {
             return _state;
         }
 
-    private:
-        Component _type;
-        Tristate _state;
     };
 }
 
 const std::unordered_map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> nts::ComponentsFactory::_components = {
         // Special components
-        {"input",  []() { return std::make_unique<SampleComponent>(_input); }},
-        {"output", []() { return std::make_unique<SampleComponent>(_output); }},
-        {"true",   []() { return std::make_unique<SampleComponent>(_true); }},
-        {"false",  []() { return std::make_unique<SampleComponent>(_false); }},
-        {"clock",  []() { return std::make_unique<SampleComponent>(_clock); }},
+        {"input",  []() { return std::make_unique<ComponentInput>(); }},
+        {"output", []() { return std::make_unique<ComponentOutput>(); }},
+        {"true",   []() { return std::make_unique<ComponentTrue>(); }},
+        {"false",  []() { return std::make_unique<ComponentFalse>(); }},
+        {"clock",  []() { return std::make_unique<ComponentClock>(); }},
 
         // Elementary components
-        {"and",    []() { return std::make_unique<SampleComponent>(_and); }},
-        {"or",     []() { return std::make_unique<SampleComponent>(_or); }},
-        {"xor",    []() { return std::make_unique<SampleComponent>(_xor); }},
-        {"not",    []() { return std::make_unique<SampleComponent>(_not); }},
+        {"and",    []() { return std::make_unique<ComponentAnd>(); }},
+        {"or",     []() { return std::make_unique<ComponentOr>(); }},
+        {"xor",    []() { return std::make_unique<ComponentXor>(); }},
+        {"not",    []() { return std::make_unique<ComponentNot>(); }},
 
         // Gates components
-        {"4001",   []() { return std::make_unique<SampleComponent>(_4001); }},
-        {"4011",   []() { return std::make_unique<SampleComponent>(_4011); }},
-        {"4030",   []() { return std::make_unique<SampleComponent>(_4030); }},
-        {"4069",   []() { return std::make_unique<SampleComponent>(_4069); }},
-        {"4071",   []() { return std::make_unique<SampleComponent>(_4071); }},
-        {"4081",   []() { return std::make_unique<SampleComponent>(_4081); }},
+        {"4001",   []() { return std::make_unique<Component4001>(); }},
+        {"4011",   []() { return std::make_unique<Component4011>(); }},
+        {"4030",   []() { return std::make_unique<Component4030>(); }},
+        {"4069",   []() { return std::make_unique<Component4069>(); }},
+        {"4071",   []() { return std::make_unique<Component4071>(); }},
+        {"4081",   []() { return std::make_unique<Component4081>(); }},
 
         // Advanced components
         {"4008",   []() { return std::make_unique<SampleComponent>(_4008); }},

@@ -7,6 +7,8 @@
 
 #include "ComponentXor.hpp"
 
+nts::ComponentXor::ComponentXor() : AComponent(_xor, 3) {}
+
 nts::Tristate nts::ComponentXor::compute(std::size_t pin) {
     Tristate state1 = at(1);
     Tristate state2 = at(2);

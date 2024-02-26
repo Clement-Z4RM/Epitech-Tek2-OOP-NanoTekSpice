@@ -13,6 +13,8 @@
 namespace nts {
     class ComponentNot : public AComponent {
     public:
+        ComponentNot();
+
         Tristate compute(std::size_t pin) override;
     };
 }

@@ -7,6 +7,10 @@
 
 #include "Component4011.hpp"
 
+nts::Component4011::Component4011() : AComponent(_4011, 13) {
+    _excludedPins.push_back(7);
+}
+
 nts::Tristate nts::Component4011::compute(std::size_t pin) {
     if (pin == 3 || pin == 4 || pin == 10 || pin == 11) {
         size_t input1Pin, input2Pin;
@@ -20,6 +24,6 @@ nts::Tristate nts::Component4011::compute(std::size_t pin) {
         Tristate input1 = getLink(input1Pin);
         Tristate input2 = getLink(input2Pin);
         return !(input1 && input2);
-    } else
-        return Undefined;
+    }
+    return Undefined;
 }

@@ -13,6 +13,8 @@
 namespace nts {
     class ComponentOr : public AComponent {
     public:
+        ComponentOr();
+
         Tristate compute(std::size_t pin) override;
     };
 }

@@ -13,6 +13,8 @@
 namespace nts {
     class ComponentFalse : public AComponent {
     public:
+        ComponentFalse();
+
         Tristate compute(std::size_t pin) override;
     };
 }

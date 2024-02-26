@@ -6,7 +6,8 @@
 */
 
 #include "ComponentAnd.hpp"
-#include <iostream>
+
+nts::ComponentAnd::ComponentAnd() : AComponent(_and, 3) {}
 
 nts::Tristate nts::ComponentAnd::compute(std::size_t pin) {
     Tristate state1 = at(1);
