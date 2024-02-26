@@ -6,26 +6,59 @@ set(CMAKE_CXX_STANDARD 20)
 include_directories(include)
 
 set(NANOTEKSPICE_SOURCES
+        include/IComponent.hpp
         src/Main.cpp
         src/NanoTekSpice.cpp
+        src/Utilities/Utilities.cpp
+        src/Utilities/Utilities.hpp
         src/Parsing/Config/Config.cpp
         src/Parsing/Config/Config.hpp
         src/Circuit/Circuit.cpp
         src/Circuit/Circuit.hpp
-        include/IComponent.hpp
-        src/Utilities/Utilities.cpp
-        src/Utilities/Utilities.hpp
-        src/Components/Factory/ComponentsFactory.cpp
-        src/Components/Factory/ComponentsFactory.hpp
         src/Shell/Shell.cpp
         src/Shell/Shell.hpp
-)
+        src/Components/AComponent.cpp
+        src/Components/AComponent.hpp
+        src/Components/Elementary/And/ComponentAnd.cpp
+        src/Components/Elementary/And/ComponentAnd.hpp
+        src/Components/Elementary/Not/ComponentNot.cpp
+        src/Components/Elementary/Not/ComponentNot.hpp
+        src/Components/Special/False/ComponentFalse.cpp
+        src/Components/Special/False/ComponentFalse.hpp
+        src/Components/Special/True/ComponentTrue.cpp
+        src/Components/Special/True/ComponentTrue.hpp
+        src/Components/Elementary/Or/ComponentOr.cpp
+        src/Components/Elementary/Or/ComponentOr.hpp
+        src/Components/Elementary/Xor/ComponentXor.cpp
+        src/Components/Elementary/Xor/ComponentXor.hpp
+        src/Components/Special/Input/ComponentInput.cpp
+        src/Components/Special/Input/ComponentInput.hpp
+        src/Components/Special/Output/ComponentOutput.cpp
+        src/Components/Special/Output/ComponentOutput.hpp
+        src/Components/Special/Clock/ComponentClock.cpp
+        src/Components/Special/Clock/ComponentClock.hpp
+        src/Components/Gates/4001/Component4001.cpp
+        src/Components/Gates/4001/Component4001.hpp
+        src/Components/Gates/4011/Component4011.cpp
+        src/Components/Gates/4011/Component4011.hpp
+        src/Components/Gates/4030/Component4030.cpp
+        src/Components/Gates/4030/Component4030.hpp
+        src/Components/Gates/4069/Component4069.cpp
+        src/Components/Gates/4069/Component4069.hpp
+        src/Components/Gates/4071/Component4071.cpp
+        src/Components/Gates/4071/Component4071.hpp
+        src/Components/Gates/4081/Component4081.cpp
+        src/Components/Gates/4081/Component4081.hpp
+        src/Components/Factory/ComponentsFactory.cpp
+        src/Components/Factory/ComponentsFactory.hpp)
 
 set(UNIT_TESTS_SOURCES
         tests/test_or_gate.cpp
         tests/test_clock.cpp
         tests/test_bad.cpp
-        tests/test_no_argument.cpp)
+        tests/test_no_argument.cpp
+        src/Components/Elementary/Or/ComponentOr.cpp
+        src/Components/Elementary/Or/ComponentOr.hpp)
 
 add_executable(nanotekspice ${NANOTEKSPICE_SOURCES})
 

@@ -11,13 +11,7 @@ NAME		=	nanotekspice
 
 TESTS_NAME	=	unit_tests
 
-SRC			=	src/Main.cpp									\
-				src/NanoTekSpice.cpp							\
-				src/Utilities/Utilities.cpp						\
-				src/Parsing/Config/Config.cpp					\
-				src/Circuit/Circuit.cpp							\
-				src/Components/Factory/ComponentsFactory.cpp	\
-				src/Shell/Shell.cpp
+SRC			=
 
 OBJ			=	$(SRC:.cpp=.o)
 
