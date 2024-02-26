@@ -62,7 +62,7 @@ namespace nts {
 
         [[nodiscard]] bool isLoaded() const;
 
-        [[nodiscard]] const std::unordered_map<std::string, std::unique_ptr<IComponent>> &getComponents() const;
+        [[nodiscard]] const std::map<std::string, std::unique_ptr<IComponent>> &getComponents() const;
 
         [[nodiscard]] unsigned int getTick() const;
 
@@ -78,8 +78,7 @@ namespace nts {
         bool _isLoaded;
         std::unordered_map<std::string, void (Circuit::*)(const std::string &)> _partsFunctions;
 
-        // TODO: map for display command (ASCII order)?
-        std::unordered_map<std::string, std::unique_ptr<IComponent>> _components;
+        std::map<std::string, std::unique_ptr<IComponent>> _components;
 
         unsigned int _tick;
 

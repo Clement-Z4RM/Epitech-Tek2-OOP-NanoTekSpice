@@ -16,7 +16,6 @@
 #define EXIT false
 
 namespace nts {
-    // TODO: change commands type
     class Shell {
     public:
         static void run(Circuit &circuit);

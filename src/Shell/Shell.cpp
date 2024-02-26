@@ -36,7 +36,8 @@ bool nts::Shell::_executeCommand(const std::string &command, Circuit &circuit) {
     if (std::regex_match(command, std::regex(R"(^\w+=.*$)"))) {
         _changeInputValue(command, circuit);
         return true;
-    } else if (_commands.contains(command))
+    }
+    if (_commands.contains(command))
         return _commands.at(command)(circuit);
     std::cerr << command << ": Command not found." << std::endl;
     return true;
@@ -47,7 +48,7 @@ bool nts::Shell::_exit([[maybe_unused]] Circuit &circuit) {
 }
 
 bool nts::Shell::_display(Circuit &circuit) {
-    const std::unordered_map<std::string, std::unique_ptr<nts::IComponent>> &components = circuit.getComponents();
+    const std::map<std::string, std::unique_ptr<nts::IComponent>> &components = circuit.getComponents();
 
     std::cout << "tick: " << circuit.getTick() << std::endl;
     std::cout << "input(s):" << std::endl;
@@ -83,7 +84,7 @@ bool nts::Shell::_simulate(Circuit &circuit) {
     return true;
 }
 
-volatile bool loop;
+static volatile bool loop;
 bool nts::Shell::_loop([[maybe_unused]] Circuit &circuit) {
     struct sigaction sa{};
     sa.sa_handler = [](int) { loop = false; };
