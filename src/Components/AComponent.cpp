@@ -43,7 +43,7 @@ void nts::AComponent::simulate([[maybe_unused]] std::size_t tick) {}
  * @param otherPin The pin of the other component.
  */
 void nts::AComponent::insert(std::size_t pin, IComponent &other, std::size_t otherPin) {
-    Link link = {other, otherPin, other.compute(otherPin)};
+    Link link = {other, otherPin};
     _links.insert(std::make_pair(pin, link));
 }
 

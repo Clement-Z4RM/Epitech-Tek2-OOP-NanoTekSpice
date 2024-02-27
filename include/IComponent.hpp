@@ -42,7 +42,6 @@ namespace nts {
     struct Link {
         IComponent &other;
         std::size_t otherPin;
-        Tristate state;
     };
 }
 
