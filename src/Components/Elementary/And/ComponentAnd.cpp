@@ -10,8 +10,8 @@
 nts::ComponentAnd::ComponentAnd() : AComponent(_and, 3) {}
 
 nts::Tristate nts::ComponentAnd::compute(std::size_t pin) {
-    Tristate state1 = at(1);
-    Tristate state2 = at(2);
+    Tristate state1 = getLink(1);
+    Tristate state2 = getLink(2);
 
     switch (pin) {
         case 1:

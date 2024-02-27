@@ -10,8 +10,8 @@
 nts::ComponentXor::ComponentXor() : AComponent(_xor, 3) {}
 
 nts::Tristate nts::ComponentXor::compute(std::size_t pin) {
-    Tristate state1 = at(1);
-    Tristate state2 = at(2);
+    Tristate state1 = getLink(1);
+    Tristate state2 = getLink(2);
 
     switch (pin) {
         case 1:
@@ -19,7 +19,7 @@ nts::Tristate nts::ComponentXor::compute(std::size_t pin) {
         case 2:
             return state2;
         case 3:
-            return (state1 != state2) ? True : False;
+            return state1 ^ state2;
         default:
             return Undefined;
     }
