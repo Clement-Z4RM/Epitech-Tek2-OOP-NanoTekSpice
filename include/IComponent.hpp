@@ -36,7 +36,6 @@ namespace nts {
         [[nodiscard]] virtual const std::vector<std::size_t> &getExcludedPins() const = 0;
 
         virtual void insert(std::size_t pin, IComponent &other, std::size_t otherPin) = 0;
-        [[nodiscard]] virtual Tristate at(std::size_t pin) const = 0;
     };
 
     struct Link {

@@ -102,20 +102,12 @@ char nts::AComponent::getValue() const {
  * @return The computed value of the linked component.
  */
 nts::Tristate nts::AComponent::getLink(std::size_t pin) const {
-    if (_links.find(pin) == _links.end())
-        return Undefined;
+    const auto &link = std::find_if(_links.begin(), _links.end(), [pin](const std::pair<std::size_t, Link> &link) {
+        return link.first == pin;
+    });
 
-    Link link = _links.at(pin);
-
-    return link.other.compute(link.otherPin);
-}
-
-nts::Tristate nts::AComponent::at(std::size_t pin) const {
-    if (_links.contains(pin)) {
-        const Link &link = _links.at(pin);
-
-        return link.other.compute(link.otherPin);
-    }
+    if (link != _links.end())
+        return link->second.other.compute(link->second.otherPin);
     return Undefined;
 }
 
