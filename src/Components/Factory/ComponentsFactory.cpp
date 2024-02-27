@@ -21,6 +21,15 @@
 #include "../Gates/4069/Component4069.hpp"
 #include "../Gates/4071/Component4071.hpp"
 #include "../Gates/4081/Component4081.hpp"
+#include "../Advanced/4008/Component4008.hpp"
+#include "../Advanced/4013/Component4013.hpp"
+#include "../Advanced/4017/Component4017.hpp"
+#include "../Advanced/4040/Component4040.hpp"
+#include "../Advanced/4094/Component4094.hpp"
+#include "../Advanced/4512/Component4512.hpp"
+#include "../Advanced/4514/Component4514.hpp"
+#include "../Advanced/4801/Component4801.hpp"
+#include "../Advanced/2716/Component2716.hpp"
 #include "ComponentsFactory.hpp"
 
 #include <iostream>
@@ -43,10 +52,6 @@ namespace nts {
 
         [[nodiscard]] Tristate compute([[maybe_unused]] std::size_t pin) override {
             return Tristate::Undefined;
-        }
-
-        [[nodiscard]] Tristate at([[maybe_unused]] std::size_t pin) const override {
-            return _state;
         }
 
     };
@@ -75,15 +80,15 @@ const std::unordered_map<std::string, std::function<std::unique_ptr<nts::ICompon
         {"4081",   []() { return std::make_unique<Component4081>(); }},
 
         // Advanced components
-        {"4008",   []() { return std::make_unique<SampleComponent>(_4008); }},
-        {"4013",   []() { return std::make_unique<SampleComponent>(_4013); }},
-        {"4017",   []() { return std::make_unique<SampleComponent>(_4017); }},
-        {"4040",   []() { return std::make_unique<SampleComponent>(_4040); }},
-        {"4094",   []() { return std::make_unique<SampleComponent>(_4094); }},
-        {"4512",   []() { return std::make_unique<SampleComponent>(_4512); }},
-        {"4514",   []() { return std::make_unique<SampleComponent>(_4514); }},
-        {"4801",   []() { return std::make_unique<SampleComponent>(_4801); }},
-        {"2716",   []() { return std::make_unique<SampleComponent>(_2716); }},
+        {"4008",   []() { return std::make_unique<Component4008>(); }},
+        {"4013",   []() { return std::make_unique<Component4013>(); }},
+        {"4017",   []() { return std::make_unique<Component4017>(); }},
+        {"4040",   []() { return std::make_unique<Component4040>(); }},
+        {"4094",   []() { return std::make_unique<Component4094>(); }},
+        {"4512",   []() { return std::make_unique<Component4512>(); }},
+        {"4514",   []() { return std::make_unique<Component4514>(); }},
+        {"4801",   []() { return std::make_unique<Component4801>(); }},
+        {"2716",   []() { return std::make_unique<Component2716>(); }},
 
         // Logger
         {"logger", []() { return std::make_unique<SampleComponent>(_logger); }}
