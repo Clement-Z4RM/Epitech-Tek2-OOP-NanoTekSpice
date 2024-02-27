@@ -23,9 +23,7 @@
 #define PIN            1
 
 namespace nts {
-    // TODO: Implement IComponent and uncomment the inheritance (or not, IDK)
-    // TODO: throw errors if function is called before loadConfig
-    class Circuit /*: public IComponent*/ {
+    class Circuit {
     public:
         class Error : public std::exception {
         public:
