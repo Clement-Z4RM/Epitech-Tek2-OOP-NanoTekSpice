@@ -35,7 +35,7 @@ const char *nts::Circuit::Error::what() const noexcept {
     return _message.c_str();
 }
 
-nts::Circuit::Circuit() : _isLoaded(false), _tick(0) {
+nts::Circuit::Circuit() {
     _partsFunctions["chipsets"] = &nts::Circuit::_chipsetFunction;
     _partsFunctions["links"] = &nts::Circuit::_linkFunction;
 }
@@ -174,10 +174,12 @@ void nts::Circuit::setInputValue(const std::string &componentName, char value) {
 }
 
 // TODO: Simulate from inputs to outputs
-void nts::Circuit::simulate() {
+void nts::Circuit::simulate(bool incrementTick) {
     if (!_isLoaded)
         throw Error(Error::ERRORS[Error::NotLoadedConfig]);
-    ++_tick;
+
+    if (incrementTick)
+        ++_tick;
     for (const auto &item: _components)
         item.second->simulate(_tick);
 }
