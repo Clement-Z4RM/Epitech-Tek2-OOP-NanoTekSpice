@@ -64,7 +64,9 @@ set(NANOTEKSPICE_SOURCES
         src/Components/Advanced/4094/Component4094.cpp
         src/Components/Advanced/4094/Component4094.hpp
         src/Components/Advanced/4512/Component4512.cpp
-        src/Components/Advanced/4512/Component4512.hpp)
+        src/Components/Advanced/4512/Component4512.hpp
+        src/Components/Advanced/4514/Component4514.cpp
+        src/Components/Advanced/4514/Component4514.hpp)
 
 set(UNIT_TESTS_SOURCES
         tests/test_or_gate.cpp
