@@ -111,8 +111,11 @@ nts::Tristate nts::AComponent::getLink(std::size_t pin) const {
 }
 
 nts::Tristate nts::AComponent::at(std::size_t pin) const {
-    if (_links.contains(pin))
-        return _links.at(pin).state;
+    if (_links.contains(pin)) {
+        const Link &link = _links.at(pin);
+
+        return link.other.compute(link.otherPin);
+    }
     return Undefined;
 }
 
