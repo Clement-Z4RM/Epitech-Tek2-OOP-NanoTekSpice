@@ -7,8 +7,9 @@
 
 #include "Component4030.hpp"
 
-nts::Component4030::Component4030() : AComponent(_4030, 13) {
+nts::Component4030::Component4030() : AComponent(_4030, 14) {
     _excludedPins.push_back(7);
+    _excludedPins.push_back(14);
 }
 
 nts::Tristate nts::Component4030::compute(std::size_t pin) {
