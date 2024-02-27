@@ -14,6 +14,7 @@ namespace nts {
     class Component4094 : public AComponent {
     public:
         Component4094();
+        Tristate compute(std::size_t pin) override;
     };
 }
 
