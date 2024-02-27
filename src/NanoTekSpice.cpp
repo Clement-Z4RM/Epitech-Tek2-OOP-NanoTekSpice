@@ -32,6 +32,7 @@ int nts::NanoTekSpice::run(int argc, const char *argv[]) {
     if (!circuit.isLoaded())
         return 84;
 
+    circuit.simulate(false); // Simulate the circuit to set the initial state of the outputs
     Shell::run(circuit);
     return 0;
 }

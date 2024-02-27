@@ -70,15 +70,15 @@ namespace nts {
 
         void setInputValue(const std::string &componentName, char value);
 
-        void simulate();
+        void simulate(bool incrementTick = true);
 
     private:
-        bool _isLoaded;
+        bool _isLoaded = false;
         std::unordered_map<std::string, void (Circuit::*)(const std::string &)> _partsFunctions;
 
         std::map<std::string, std::unique_ptr<IComponent>> _components;
 
-        unsigned int _tick;
+        unsigned int _tick = 0;
 
         void _chipsetFunction(const std::string &line);
 

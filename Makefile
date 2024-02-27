@@ -50,7 +50,14 @@ TESTS_SRC	=	$(filter-out src/Main.cpp, $(SRC))	\
 				tests/test_no_argument.cpp			\
 				tests/test_bad.cpp					\
 				tests/test_or_gate.cpp				\
+				tests/test_input_output.cpp			\
 				tests/test_clock.cpp				\
+				tests/test_true.cpp					\
+				tests/test_false.cpp				\
+				tests/test_not.cpp					\
+				tests/test_and.cpp					\
+				tests/test_or.cpp					\
+				tests/test_xor.cpp					\
 				tests/test_4001.cpp					\
 				tests/test_4011.cpp					\
 				tests/test_4030.cpp					\
