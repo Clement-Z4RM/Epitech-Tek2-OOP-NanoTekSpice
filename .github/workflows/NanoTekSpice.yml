@@ -28,7 +28,6 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker:latest
-    if: false
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -68,7 +67,7 @@ jobs:
     name: Push to mirror
     needs:
       - build
-#      - tests
+      - tests
       - check_coding_style
     if: ${{ github.ref_name == 'main' && github.event_name == 'push' }}
     runs-on: ubuntu-latest
