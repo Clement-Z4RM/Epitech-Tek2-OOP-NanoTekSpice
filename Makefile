@@ -35,6 +35,7 @@ SRC			=	src/Main.cpp										\
 				src/Components/Gates/4081/Component4081.cpp			\
 				src/Components/Advanced/4008/Component4008.cpp		\
 				src/Components/Advanced/4013/Component4013.cpp		\
+				src/Components/Advanced/4017/Component4017.cpp		\
 				src/Components/Factory/ComponentsFactory.cpp
 
 OBJ			=	$(SRC:.cpp=.o)
