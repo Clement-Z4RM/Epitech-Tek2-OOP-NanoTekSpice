@@ -8,12 +8,11 @@
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 #include <iostream>
-#include <fstream>
 #include <string>
 #include <cstdio>
 #include "NanoTekSpice.hpp"
 
-static const char *ARGV[] = {"./nanotekspice", "./tests/test_files/or_gate/or_gate.nts"};
+static const char *ARGV[] = {"./nanotekspice", "./tests/test_files/or_gate.nts"};
 
 static void redirectAllStd() {
     cr_redirect_stdout();
@@ -23,12 +22,13 @@ static void redirectAllStd() {
 Test(NanoTekSpice, or_gate, .init = redirectAllStd)
 {
     FILE *fake_stdin = cr_get_redirected_stdin();
-    std::ifstream file("tests/test_files/or_gate/input.txt");
-    std::string buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 
-    fprintf(fake_stdin, "%s", buffer.c_str());
+    fprintf(fake_stdin, "b=0\n"
+                        "a=1\n"
+                        "simulate\n"
+                        "display\n"
+                        "exit\n");
     fclose(fake_stdin);
-    file.close();
 
     cr_assert_eq(nts::NanoTekSpice::run(2, ARGV), 0);
 

@@ -83,7 +83,14 @@ set(UNIT_TESTS_SOURCES
         tests/test_4030.cpp
         tests/test_4071.cpp
         tests/test_4081.cpp
-        tests/test_4069.cpp)
+        tests/test_4069.cpp
+        tests/test_and.cpp
+        tests/test_false.cpp
+        tests/test_input_output.cpp
+        tests/test_not.cpp
+        tests/test_or.cpp
+        tests/test_true.cpp
+        tests/test_xor.cpp)
 
 add_executable(nanotekspice ${NANOTEKSPICE_SOURCES})
 
