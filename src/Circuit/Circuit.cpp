@@ -173,9 +173,11 @@ void nts::Circuit::setInputValue(const std::string &componentName, char value) {
     component1->updateState(state);
 }
 
-// TODO
+// TODO: Simulate from inputs to outputs
 void nts::Circuit::simulate() {
     if (!_isLoaded)
         throw Error(Error::ERRORS[Error::NotLoadedConfig]);
     ++_tick;
+    for (const auto &item: _components)
+        item.second->simulate(_tick);
 }

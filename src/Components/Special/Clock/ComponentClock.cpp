@@ -9,7 +9,11 @@
 
 void nts::ComponentClock::simulate(std::size_t tick) {
     if (tick != _tick) {
-        _state = _state = !_state;
+        if (_nextState != Undefined) {
+            _state = _nextState;
+            _nextState = Undefined;
+        } else
+            _state = !_state;
         _tick = tick;
     }
 }
