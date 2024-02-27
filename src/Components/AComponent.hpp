@@ -51,7 +51,7 @@ namespace nts {
 
     protected:
         // Only for inputs, clocks and outputs
-        Tristate _nextState;
+        Tristate _nextState = Undefined;
 
         Tristate _state;
         std::size_t _tick = 0;
