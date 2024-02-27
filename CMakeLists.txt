@@ -60,13 +60,30 @@ set(NANOTEKSPICE_SOURCES
         src/Components/Advanced/2716/Component2716.cpp
         src/Components/Advanced/2716/Component2716.hpp
         src/Components/Advanced/4040/Component4040.cpp
-        src/Components/Advanced/4040/Component4040.hpp)
+        src/Components/Advanced/4040/Component4040.hpp
+        src/Components/Advanced/4094/Component4094.cpp
+        src/Components/Advanced/4094/Component4094.hpp
+        src/Components/Advanced/4512/Component4512.cpp
+        src/Components/Advanced/4512/Component4512.hpp
+        src/Components/Advanced/4514/Component4514.cpp
+        src/Components/Advanced/4514/Component4514.hpp
+        src/Components/Advanced/4801/Component4801.cpp
+        src/Components/Advanced/4801/Component4801.hpp)
+
+include_directories(tests/include)
 
 set(UNIT_TESTS_SOURCES
+        tests/include/tests.hpp
+        tests/test_no_argument.cpp
+        tests/test_bad.cpp
         tests/test_or_gate.cpp
         tests/test_clock.cpp
-        tests/test_bad.cpp
-        tests/test_no_argument.cpp)
+        tests/test_4001.cpp
+        tests/test_4011.cpp
+        tests/test_4030.cpp
+        tests/test_4071.cpp
+        tests/test_4081.cpp
+        tests/test_4069.cpp)
 
 add_executable(nanotekspice ${NANOTEKSPICE_SOURCES})
 

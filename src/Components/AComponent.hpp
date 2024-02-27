@@ -47,7 +47,6 @@ namespace nts {
         [[nodiscard]] const std::vector<std::size_t> &getExcludedPins() const override;
 
         void insert(std::size_t pin, IComponent &other, std::size_t otherPin) override;
-        [[nodiscard]] Tristate at(std::size_t pin) const override;
 
     protected:
         // Only for inputs, clocks and outputs

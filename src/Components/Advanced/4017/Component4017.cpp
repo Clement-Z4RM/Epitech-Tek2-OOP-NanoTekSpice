@@ -10,3 +10,7 @@
 nts::Component4017::Component4017() : AComponent(_4017, 16) {
 }
 
+nts::Tristate nts::Component4017::compute([[maybe_unused]]std::size_t pin) {
+    return nts::True;
+}
+

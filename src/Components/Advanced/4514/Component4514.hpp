@@ -2,20 +2,20 @@
 ** EPITECH PROJECT, 2024
 ** NanoTekSpice
 ** File description:
-** Component4017.hpp
+** Component4514.hpp
 */
 
-#ifndef COMPONENT4017_HPP
-#define COMPONENT4017_HPP
+#ifndef COMPONENT4514_HPP
+#define COMPONENT4514_HPP
 
 #include "../../AComponent.hpp"
 
 namespace nts {
-    class Component4017 : public AComponent {
+    class Component4514 : public AComponent {
     public:
-        Component4017();
+        Component4514();
         Tristate compute(std::size_t pin) override;
     };
 }
 
-#endif //COMPONENT4017_HPP
+#endif //COMPONENT4514_HPP

@@ -38,19 +38,29 @@ SRC			=	src/Main.cpp										\
 				src/Components/Advanced/4017/Component4017.cpp		\
 				src/Components/Advanced/2716/Component2716.cpp		\
 				src/Components/Advanced/4040/Component4040.cpp		\
+				src/Components/Advanced/4094/Component4094.cpp		\
+				src/Components/Advanced/4512/Component4512.cpp		\
+				src/Components/Advanced/4514/Component4514.cpp		\
+				src/Components/Advanced/4801/Component4801.cpp		\
 				src/Components/Factory/ComponentsFactory.cpp
 
 OBJ			=	$(SRC:.cpp=.o)
 
 TESTS_SRC	=	$(filter-out src/Main.cpp, $(SRC))	\
+				tests/test_no_argument.cpp			\
+				tests/test_bad.cpp					\
 				tests/test_or_gate.cpp				\
 				tests/test_clock.cpp				\
-				tests/test_bad.cpp					\
-				tests/test_no_argument.cpp
+				tests/test_4001.cpp					\
+				tests/test_4011.cpp					\
+				tests/test_4030.cpp					\
+				tests/test_4069.cpp					\
+				tests/test_4071.cpp					\
+				tests/test_4081.cpp
 
 CPPFLAGS	=	-std=c++20 -W -Wall -Wextra -Werror -Wpedantic -I./include/
 
-TESTS_FLAGS	=	-lcriterion --coverage
+TESTS_FLAGS	=	-I./tests/include/ -lcriterion --coverage
 
 # Compilation rules
 
