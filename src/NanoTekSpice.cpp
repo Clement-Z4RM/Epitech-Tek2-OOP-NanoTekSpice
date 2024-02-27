@@ -67,4 +67,10 @@ nts::Tristate nts::operator||(nts::Tristate state1, nts::Tristate state2) {
         return Undefined;
     return False;
 }
+
+nts::Tristate nts::operator^(Tristate state1, Tristate state2) {
+    if (state1 == Undefined || state2 == Undefined)
+        return Undefined;
+    return (state1 != state2) ? True : False;
+}
 //endregion
