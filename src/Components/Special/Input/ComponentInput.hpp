@@ -15,6 +15,7 @@ namespace nts {
     public:
         ComponentInput();
 
+        void simulate(std::size_t tick) override;
         Tristate compute(std::size_t pin) override;
     };
 }

@@ -51,7 +51,10 @@ namespace nts {
 
     protected:
         // Only for inputs, clocks and outputs
+        Tristate _nextState;
+
         Tristate _state;
+        std::size_t _tick = 0;
 
         Component _type;
         std::map<std::size_t, Link> _links;

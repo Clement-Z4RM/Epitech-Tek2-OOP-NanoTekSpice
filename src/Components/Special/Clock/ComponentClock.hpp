@@ -12,13 +12,11 @@
 
 namespace nts {
     class ComponentClock : public AComponent {
-        Tristate compute(std::size_t pin) override;
-
     public:
         ComponentClock();
 
-    private:
-        Tristate _state = Undefined;
+        void simulate(std::size_t tick) override;
+        Tristate compute(std::size_t pin) override;
     };
 }
 

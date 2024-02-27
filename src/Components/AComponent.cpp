@@ -80,7 +80,7 @@ void nts::AComponent::setLink(std::size_t pin, std::unique_ptr<IComponent> &othe
 }
 
 void nts::AComponent::updateState(nts::Tristate state) {
-    _state = state;
+    _nextState = state;
 }
 
 char nts::AComponent::getValue() const {
