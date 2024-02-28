@@ -7,18 +7,18 @@
 
 #include "ComponentClock.hpp"
 
+nts::ComponentClock::ComponentClock() : AComponent(_clock, 1) {}
+
 void nts::ComponentClock::simulate(std::size_t tick) {
     if (tick != _tick) {
-        if (_nextState != Undefined) {
+        if (_hasChanged) {
             _state = _nextState;
-            _nextState = Undefined;
-        } else
+            _hasChanged = false;
+        } else if (_state != Undefined)
             _state = !_state;
         _tick = tick;
     }
 }
-
-nts::ComponentClock::ComponentClock() : AComponent(_clock, 1) {}
 
 nts::Tristate nts::ComponentClock::compute(std::size_t pin) {
     if (pin == 1)

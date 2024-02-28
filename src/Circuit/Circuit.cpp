@@ -93,7 +93,6 @@ void nts::Circuit::loadConfig(nts::Config &config) {
     }
     if (_components.empty())
         throw Error(Error::ERRORS[Error::NoChipset]);
-    // TODO: Error if no link/a chipset is not linked/no path from input to output/no input and or output/...?
     _isLoaded = true;
 }
 
@@ -173,7 +172,11 @@ void nts::Circuit::setInputValue(const std::string &componentName, char value) {
     component1->updateState(state);
 }
 
-// TODO: Simulate from inputs to outputs
+/**
+ * @brief Simulate the circuit (first inputs and clocks, then the rest of the components, and then the outputs)
+ *
+ * @param incrementTick If true, the tick will be incremented (default: true)
+ */
 void nts::Circuit::simulate(bool incrementTick) {
     if (!_isLoaded)
         throw Error(Error::ERRORS[Error::NotLoadedConfig]);
@@ -181,5 +184,12 @@ void nts::Circuit::simulate(bool incrementTick) {
     if (incrementTick)
         ++_tick;
     for (const auto &item: _components)
-        item.second->simulate(_tick);
+        if (item.second->getType() == _input || item.second->getType() == _clock)
+            item.second->simulate(_tick);
+    for (const auto &item: _components)
+        if (item.second->getType() != _input && item.second->getType() != _clock && item.second->getType() != _output)
+            item.second->simulate(_tick);
+    for (const auto &item: _components)
+        if (item.second->getType() == _output)
+            item.second->simulate(_tick);
 }

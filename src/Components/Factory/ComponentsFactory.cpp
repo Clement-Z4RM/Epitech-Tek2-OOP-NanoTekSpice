@@ -30,32 +30,10 @@
 #include "../Advanced/4514/Component4514.hpp"
 #include "../Advanced/4801/Component4801.hpp"
 #include "../Advanced/2716/Component2716.hpp"
+#include "../Logger/ComponentLogger.hpp"
 #include "ComponentsFactory.hpp"
 
 #include <iostream>
-
-// TODO: Use real components and replace std::unique_ptr<SampleComponent> with std::unique_ptr<COMPONENT>
-namespace nts {
-    class SampleComponent : public AComponent {
-    public:
-        explicit SampleComponent(Component type) : AComponent(type, 13) {
-            _excludedPins.push_back(7);
-        }
-
-        [[nodiscard]] Component getType() const override {
-            return _type;
-        }
-
-        void simulate([[maybe_unused]] std::size_t tick) override {
-            std::cout << _type << std::endl;
-        }
-
-        [[nodiscard]] Tristate compute([[maybe_unused]] std::size_t pin) override {
-            return Tristate::Undefined;
-        }
-
-    };
-}
 
 const std::unordered_map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> nts::ComponentsFactory::_components = {
         // Special components
@@ -91,7 +69,7 @@ const std::unordered_map<std::string, std::function<std::unique_ptr<nts::ICompon
         {"2716",   []() { return std::make_unique<Component2716>(); }},
 
         // Logger
-        {"logger", []() { return std::make_unique<SampleComponent>(_logger); }}
+        {"logger", []() { return std::make_unique<ComponentLogger>(); }}
 };
 
 std::unique_ptr<nts::IComponent> nts::ComponentsFactory::createComponent(const std::string &type) {

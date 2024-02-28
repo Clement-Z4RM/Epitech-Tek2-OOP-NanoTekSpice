@@ -65,6 +65,18 @@ Test(NanoTekSpice, clock, .init = redirectAllStd)
                             "  cl: 0\n"
                             "output(s):\n"
                             "  out: 0\n"
+                            "> > "
+                            "tick: 5\n"
+                            "input(s):\n"
+                            "  cl: 0\n"
+                            "output(s):\n"
+                            "  out: 0\n"
+                            "> > "
+                            "tick: 6\n"
+                            "input(s):\n"
+                            "  cl: U\n"
+                            "output(s):\n"
+                            "  out: U\n"
                             "> ");
     cr_assert_stderr_eq_str("");
 }
