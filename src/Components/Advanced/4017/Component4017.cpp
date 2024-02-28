@@ -7,10 +7,11 @@
 
 #include "Component4017.hpp"
 
-nts::Component4017::Component4017() : AComponent(_4017, 16) {
+nts::Component4017::Component4017() : AComponent(_4017, 15) {
+    _excludedPins.push_back(8);
 }
 
-nts::Tristate nts::Component4017::compute([[maybe_unused]]std::size_t pin) {
+nts::Tristate nts::Component4017::compute([[maybe_unused]] std::size_t pin) {
     return nts::True;
 }
 
