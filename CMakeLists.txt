@@ -68,7 +68,9 @@ set(NANOTEKSPICE_SOURCES
         src/Components/Advanced/4514/Component4514.cpp
         src/Components/Advanced/4514/Component4514.hpp
         src/Components/Advanced/4801/Component4801.cpp
-        src/Components/Advanced/4801/Component4801.hpp)
+        src/Components/Advanced/4801/Component4801.hpp
+        src/Components/Logger/ComponentLogger.cpp
+        src/Components/Logger/ComponentLogger.hpp)
 
 include_directories(tests/include)
 
