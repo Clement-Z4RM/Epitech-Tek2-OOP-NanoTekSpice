@@ -35,6 +35,11 @@ nts::Config::Config(const std::string &programInvocationName, std::string filena
     _isOpen = true;
 }
 
+nts::Config::~Config() {
+    if (_file.is_open())
+        _file.close();
+}
+
 bool nts::Config::isOpen() const {
     return _isOpen;
 }
