@@ -9,6 +9,7 @@
 
 nts::Component4013::Component4013() : AComponent(_4013, 14) {
     _excludedPins.push_back(7);
+    _excludedPins.push_back(14);
     _lastClock1 = Tristate::Undefined;
     _lastClock2 = Tristate::Undefined;
     _state1 = Tristate::Undefined;
@@ -18,7 +19,7 @@ nts::Component4013::Component4013() : AComponent(_4013, 14) {
 }
 
 nts::Tristate nts::Component4013::compute(std::size_t pin) {
-    if (pin < 1 || pin > 14)
+    if (pin < 1 || pin > 13)
         return Undefined;
 
     Tristate clock1 = getLink(3);
