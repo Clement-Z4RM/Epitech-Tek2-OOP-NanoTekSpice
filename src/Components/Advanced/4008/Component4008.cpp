@@ -13,24 +13,57 @@ nts::Component4008::Component4008() : AComponent(_4008, 16){
 }
 
 nts::Tristate nts::Component4008::compute(std::size_t pin) {
-    if (pin >= 10 && pin <= 14) {
-        Tristate input1 = getLink(1);
-        Tristate input2 = getLink(2);
-        Tristate input3 = getLink(3);
-        Tristate input4 = getLink(4);
-        Tristate sum = (input1 ^ input2) ^ (input3 ^ input4);
-        Tristate deduction1 = (input1 && input2) || ((input1 || input2) && (input3 && input4));
-        Tristate deduction2 = (input3 && input4);
-        Tristate final_deduction = (deduction1 || deduction2) && !(deduction1 && deduction2);
+    if (pin == 14)
+        return _carry;
+    if (pin < 10 || pin > 14)
+        return getLink(pin);
 
-        switch (pin) {
-            case 11:
-                return sum;
-            case 12:
-                return final_deduction;
-            default:
-                return Undefined;
-        }
-    } else
+    Tristate inputs[16] = {
+            Undefined,
+            getLink(1),
+            getLink(2),
+            getLink(3),
+            getLink(4),
+            getLink(5),
+            getLink(6),
+            getLink(7),
+            Undefined,
+            getLink(9),
+            Undefined,
+            Undefined,
+            Undefined,
+            Undefined,
+            Undefined,
+            getLink(15)
+    };
+
+    if (inputs[6] == Undefined || inputs[7] == Undefined || inputs[9] == Undefined)
         return Undefined;
+    inputs[10] = (inputs[6] ^ inputs[7]) ^ inputs[9];
+    if (pin == 10) {
+        _carry = (inputs[6] && inputs[7]) || (inputs[6] && inputs[9]) || (inputs[7] && inputs[9]);
+        return inputs[10];
+    }
+
+    if (inputs[4] == Undefined || inputs[5] == Undefined)
+        return Undefined;
+    inputs[11] = (inputs[4] ^ inputs[5]) ^ inputs[10];
+    if (pin == 11) {
+        _carry = (inputs[4] && inputs[5]) || (inputs[4] && inputs[10]) || (inputs[5] && inputs[10]);
+        return inputs[11];
+    }
+
+    if (inputs[2] == Undefined || inputs[3] == Undefined)
+        return Undefined;
+    inputs[12] = (inputs[2] ^ inputs[3]) ^ inputs[11];
+    if (pin == 12) {
+        _carry = (inputs[2] && inputs[3]) || (inputs[2] && inputs[11]) || (inputs[3] && inputs[11]);
+        return inputs[12];
+    }
+
+    if (inputs[1] == Undefined || inputs[15] == Undefined)
+        return Undefined;
+    inputs[13] = (inputs[1] ^ inputs[15]) ^ inputs[12];
+    _carry = (inputs[1] && inputs[15]) || (inputs[1] && inputs[12]) || (inputs[15] && inputs[12]);
+    return inputs[13];
 }
