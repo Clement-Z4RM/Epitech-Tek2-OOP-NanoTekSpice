@@ -7,13 +7,13 @@
 
 #include "Component4008.hpp"
 
-nts::Component4008::Component4008() : AComponent(_4008, 18){
-    _excludedPins.push_back(9);
-    _excludedPins.push_back(10);
+nts::Component4008::Component4008() : AComponent(_4008, 16){
+    _excludedPins.push_back(8);
+    _excludedPins.push_back(16);
 }
 
 nts::Tristate nts::Component4008::compute(std::size_t pin) {
-    if (pin >= 11 && pin <= 18) {
+    if (pin >= 11 && pin <= 16) {
         Tristate input1 = getLink(1);
         Tristate input2 = getLink(2);
         Tristate input3 = getLink(3);
