@@ -13,7 +13,7 @@ nts::Component4008::Component4008() : AComponent(_4008, 16){
 }
 
 nts::Tristate nts::Component4008::compute(std::size_t pin) {
-    if (pin >= 11 && pin <= 16) {
+    if (pin >= 10 && pin <= 14) {
         Tristate input1 = getLink(1);
         Tristate input2 = getLink(2);
         Tristate input3 = getLink(3);
