@@ -44,21 +44,21 @@ nts::Tristate nts::Component4008::compute(std::size_t pin) {
     carry = (pins[6] && pins[7]) || (pins[6] && pins[9]) || (pins[7] && pins[9]);
 
     if (pins[4] == Undefined || pins[5] == Undefined)
-        return pin == 14 ? carry : Undefined;
+        return Undefined;
     pins[11] = (pins[4] ^ pins[5]) ^ carry;
     if (pin == 11)
         return pins[11];
     carry = (pins[4] && pins[5]) || (pins[4] && carry) || (pins[5] && carry);
 
     if (pins[2] == Undefined || pins[3] == Undefined)
-        return pin == 14 ? carry : Undefined;
+        return Undefined;
     pins[12] = (pins[2] ^ pins[3]) ^ carry;
     if (pin == 12)
         return pins[12];
     carry = (pins[2] && pins[3]) || (pins[2] && carry) || (pins[3] && carry);
 
     if (pins[1] == Undefined || pins[15] == Undefined)
-        return pin == 14 ? carry : Undefined;
+        return Undefined;
     pins[13] = (pins[1] ^ pins[15]) ^ carry;
     if (pin == 13)
         return pins[13];
