@@ -15,9 +15,6 @@ namespace nts {
     public:
         Component4008();
         Tristate compute(std::size_t pin) override;
-
-    private:
-        Tristate _carry = Undefined;
     };
 }
 
