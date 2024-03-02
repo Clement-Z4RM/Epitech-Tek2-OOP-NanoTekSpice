@@ -2,6 +2,7 @@
 *.d
 
 # CMake
+CMakeLists.txt
 cmake-build-debug
 
 # Compiled Object files
