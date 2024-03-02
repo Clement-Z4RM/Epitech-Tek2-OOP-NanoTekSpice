@@ -10,6 +10,6 @@
 nts::Component4801::Component4801() : AComponent(_4801, 24){
 }
 
-nts::Tristate nts::Component4801::compute([[maybe_unused]]std::size_t pin) {
-    return nts::True;
+nts::Tristate nts::Component4801::compute([[maybe_unused]] std::size_t pin) {
+    return Undefined;
 }
