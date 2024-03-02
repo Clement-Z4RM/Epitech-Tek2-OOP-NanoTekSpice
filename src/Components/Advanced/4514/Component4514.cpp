@@ -10,6 +10,6 @@
 nts::Component4514::Component4514() : AComponent(_4514, 24){
 }
 
-nts::Tristate nts::Component4514::compute([[maybe_unused]]std::size_t pin) {
-    return nts::True;
+nts::Tristate nts::Component4514::compute([[maybe_unused]] std::size_t pin) {
+    return Undefined;
 }
