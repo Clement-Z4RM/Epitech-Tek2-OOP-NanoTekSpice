@@ -64,7 +64,8 @@ TESTS_SRC	=	$(filter-out src/Main.cpp, $(SRC))	\
 				tests/test_4030.cpp					\
 				tests/test_4069.cpp					\
 				tests/test_4071.cpp					\
-				tests/test_4081.cpp
+				tests/test_4081.cpp					\
+				tests/test_logger.cpp
 
 CPPFLAGS	=	-std=c++20 -W -Wall -Wextra -Werror -Wpedantic -I./include/
 
